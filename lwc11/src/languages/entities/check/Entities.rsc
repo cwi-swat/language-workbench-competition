@@ -11,10 +11,8 @@ public list[str] check(Entities es) {
 		}
 		defs += {e.name};
 	}
-	for (e <- es.entities) {
-	  errors += checkEntity(e, defs);
-	}
-	return errors; 
+	
+	return ( errors | it + checkEntity(e, defs) | e <- es.entities );
 }
 
 
