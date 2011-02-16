@@ -1,6 +1,7 @@
 module languages::database::compile::Database2SQL
 
 import languages::database::ast::Database;
+import List;
 
 public str database2sql(Database db) {
 	return "
@@ -20,7 +21,7 @@ create table <t.name> (
 }
 
 public str column2sql(Column c) {
-	return "<c.name> <type2sql(c.\type)> <intercalate(", ", [ constraint2sql(cons) | cons <- constraints ])>";
+	return "<c.name> <type2sql(c.\type)> <intercalate(", ", [ constraint2sql(cons) | cons <- c.constraints ])>";
 }
 
 public str type2sql(ColumnType t) {

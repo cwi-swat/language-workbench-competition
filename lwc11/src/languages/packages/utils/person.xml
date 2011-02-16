@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package name="person">
+  <import name="car" />
+  <entities>
+    <entity name="Person">
+      <field name="name" type="string" />
+      <field name="firstName" type="string" />
+      <field name="birthDate" type="date" />
+      <field name="ownedCar" type="ref" references="Car" />
+    </entity>
+  </entities>
+</package>
+
