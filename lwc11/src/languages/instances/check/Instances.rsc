@@ -10,24 +10,17 @@ import IO;
 public list[str] check(Instances is, Entities es) {
 	edefs = ( e.name: e | e <- es.entities );
 	idefs = ();
-	toCheck = {};
 	errors = for (i <- is.instances) {
 		if (i.\type notin edefs) {
 		  	append "Declared type of <i.name> (<i.\type>) is undefined.";
 		}
-		else {
-			toCheck += {i}; // only add it if we have an entity
-		}
 		if (i.name in idefs) {
 			append "Duplicate instance <i.name>.";
 		}
-		// We add all i's to the map since then we can typecheck
-		// references, even though the referenced entity type
-		// does not exist.
 		idefs[i.name] = i.\type;
 	}
-	
-	return ( errors | it + checkInstance(i, idefs, edefs[idefs[i.name]]) | i <- toCheck);
+	return ( errors | it + checkInstance(i, idefs, edefs[idefs[i.name]]) 
+					| i <- is.instances, i.\type in edefs );
 }
 
 public list[str] checkInstance(Instance i, map[str, str] idefs, Entity e) {
@@ -53,34 +46,21 @@ public list[str] checkTypes(str f, Type t, Value v, map[str, str] idefs) {
 		return ["Expected type <getName(t.primitive)> for <f> but got <getName(v)>"];
 	}	
 
-   	switch (t) {
-    	case primitive(string()): 
-        	if (string(_) !:= v) 
-        		return typeError();
-         
-     	case primitive(date()):
-     		if (date(_, _, _) !:= v) 
-     			return typeError();
+   	switch (<t, v>) {
+    	case <primitive(string()), !string(_)>:   return typeError();
+     	case <primitive(date()), !date(_, _, _)>: return typeError();
+     	case <primitive(integer()), !integer(_)>: return typeError();
+     	case <primitive(boolean()), !boolean(_)>: return typeError();
      	
-     	case primitive(integer()):
-     		if (integer(_) !:= v) 
-     			return typeError();
+     	case <reference(str req), !reference(_)>:
+     			return ["Expected a reference to <req> for <f> but got <getName(v)>"];
      	
-     	case primitive(boolean()):
-     		if (boolean(_) !:= v) 
-     			return typeError();
-     	
-     	case reference(str req): {
-     		if (reference(_) !:= v) { 
-     			return ["Expected a reference to <req> for <f> but got <getName(v)>"]; 
-     		}
-     		actual = idefs[v.name]; 
-     		if (actual != req) {
+     	case <reference(str req), _>:  
+     		if (actual := idefs[v.name], actual != req) {
      	    	return ["Instance <v.name> referenced by field <f> should have type <req> but is <actual>"];
      		}
-	     }
      	  
-    	 default: throw "Unhandled type: <t>";
+    	default: throw "Unhandled type: <t>";
    }
    return [];
 }
