@@ -13,4 +13,5 @@ data Value
 	= date(int day, int month, int year)
 	| string(str strValue)
 	| integer(int intValue)
+	| boolean(bool boolValue)
 	| reference(str name);
