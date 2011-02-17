@@ -1,6 +1,9 @@
 package car {
-	entity Car {
+    import person2
+	entity car.ca {
 		string make
 		string model
+	}
+	entity Person {
 	}
 }

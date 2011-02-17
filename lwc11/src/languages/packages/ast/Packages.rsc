@@ -8,3 +8,12 @@ data Package
 data Import 
 	= imp(str name); 
 
+// Extension
+
+data Name
+	= qualified(str pkg, str name);
+	
+anno loc Package@location;
+anno loc Import@location;
+anno loc Name@location;
+

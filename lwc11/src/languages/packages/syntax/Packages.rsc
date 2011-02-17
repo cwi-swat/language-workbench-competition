@@ -10,3 +10,7 @@ start syntax Package
 
 syntax Import
 	= imp: "import" Ident;
+
+// Extension
+syntax Name
+	= qualified: Ident "." Ident;

@@ -1,10 +1,9 @@
 package person {
 	import car
-
 	entity Person {
 		string name
 		string firstName
 		date birthDate
-		Car ownedCar
+		car.Car ownedCar
 	}
 }

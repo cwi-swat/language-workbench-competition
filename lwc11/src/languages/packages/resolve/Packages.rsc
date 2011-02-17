@@ -22,11 +22,3 @@ public Entities resolve(map[str, Package] pkgs) {
 	//map[str, set[str]] import
 }
 
-
-public set[str] imports(Package pkg) {
-	return { n | /imp(n) <- pkg };
-}
-
-public set[str] exports(Package pkg) {
-	return { n | /entity(n, _) <- pkg };
-} 
