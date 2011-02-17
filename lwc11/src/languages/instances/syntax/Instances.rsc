@@ -4,8 +4,11 @@ import languages::entities::syntax::Ident;
 import languages::entities::syntax::Layout;
 
 start syntax Instances
-	= instances: Instance*;
-	
+	= instances: Require* Instance*;
+
+syntax Require
+	= require: "require" Ident;
+
 syntax Instance
 	= instance: Name Name "=" "{" Assign* "}";
 	

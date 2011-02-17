@@ -30,7 +30,7 @@ public list[Message] checkEntity(Entity e, set[Name] defs) {
 	}
 }
 
-str nameStr(Name name) {
+public str nameStr(Name name) {
 	if ((name@print)?) {
 		return name@print;
 	}

@@ -3,8 +3,11 @@ module languages::instances::ast::Instances
 import languages::entities::ast::Entities; // for Name
 
 data Instances
-	= instances(list[Instance] instances);
-	
+	= instances(list[Require] requires, list[Instance] instances);
+
+data Require
+	= require(str name);
+
 data Instance
 	= instance(Name \type, Name name, list[Assign] assigns);
 	

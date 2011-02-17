@@ -1,6 +1,9 @@
 module languages::instances::check::Instances
 
 import languages::entities::ast::Entities;
+import languages::entities::check::Entities; // for nameStr
+import languages::entities::utils::Merge;
+import languages::entities::utils::Load;
 import languages::instances::ast::Instances;
 
 import Node;
@@ -8,15 +11,19 @@ import Map;
 import IO;
 import Message;
 
+public list[Message] check(loc path, Instances is) {
+	return check(is, merge({ load(path, r.name) | r <- is.requires }));
+}
+
 public list[Message] check(Instances is, Entities es) {
 	edefs = ( e.name: e | e <- es.entities );
 	idefs = ();
 	errors = for (i <- is.instances) {
 		if (i.\type notin edefs) {
-		  	append error("Declared type of <i.name> (<i.\type>) is undefined.", i@location);
+		  	append error("Declared type <nameStr(i.\type)> of <nameStr(i.name)> is undefined.", i@location);
 		}
 		if (i.name in idefs) {
-			append error("Duplicate instance <i.name>.", i@location);
+			append error("Duplicate instance <nameStr(i.name)>.", i@location);
 		}
 		idefs[i.name] = i.\type;
 	}
@@ -27,13 +34,13 @@ public list[Message] check(Instances is, Entities es) {
 public list[Message] checkInstance(Instance i, map[Name, Name] idefs, Entity e) {
 	fdefs = ( f.name: f.\type | f <- e.fields );
 	
-	list[Message] errors = [ error("Field <a.name> in <i.name> is undefined in <e.name>", a@location) 
+	list[Message] errors = [ error("Field <a.name> in <nameStr(i.name)> is undefined in <nameStr(e.name)>", a@location) 
 					| a <- i.assigns, a.name notin fdefs ];
 	
-	errors += [ error("Field <a.name> in <i.name> references undefined instance <n>", a@location)
+	errors += [ error("Field <a.name> in <nameStr(i.name)> references undefined instance <n>", a@location)
 					| a <- i.assigns,  Value::reference(str n) := a.\value, n notin idefs ];
 				
-	errors += [ error("Required field <e.name>.<n> is missing in <i.name>", i@location) 
+	errors += [ error("Required field <nameStr(e.name)>.<n> is missing in <nameStr(i.name)>", i@location) 
 					| n <- domain(fdefs) - { a.name | a <- i.assigns } ];
 	
 	return ( errors | it + checkTypes(a, fdefs[a.name], a.\value, idefs) 
@@ -57,7 +64,7 @@ public list[Message] checkTypes(Assign a, Type t, Value v, map[Name, Name] idefs
      	
      	case <reference(Name req), _>:  
      		if (actual := idefs[v.name], actual != req) {
-     	    	return [error("Instance <v.name> referenced by field <a.name> should have type <req> but is <actual>", v@location) ];
+     	    	return [error("Instance <v.name> referenced by field <a.name> should have type <nameStr(req)> but is <nameStr(actual)>", v@location) ];
      		}
      	  
    }

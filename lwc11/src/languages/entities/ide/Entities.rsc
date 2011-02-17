@@ -12,9 +12,10 @@ import languages::entities::ast::Entities;
 import List;
 import ParseTree;
 
+public str ENTITIES_EXTENSION = "entities";
 
 public void registerEntities() {
-  registerLanguage("Entities", "entities", Tree (str x) {
+  registerLanguage("Entities", ENTITIES_EXTENSION, Tree (str x) {
     return parse(#languages::entities::syntax::Entities::Entities, x);
   });
 

@@ -1,3 +1,6 @@
+require person
+require car
+
 Person p = {
 	name = "Voelter"
 	birthDate = 14.02.1927
