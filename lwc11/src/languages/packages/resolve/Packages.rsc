@@ -2,8 +2,12 @@ module languages::packages::resolve::Packages
 
 import languages::packages::ast::Packages;
 import languages::entities::ast::Entities;
+import languages::packages::check::Packages;
+import languages::packages::utils::Load;
 
-public Entities resolve(map[str, Package] pkgs) {
+import IO;
+
+public map[str, LoadResult] resolve(map[str, LoadResult] pkgs) {
 	// replace all identifiers with long identifiers
 	// assumptions: all imports  are in pkgs
 	//   there may be cycles
@@ -13,12 +17,18 @@ public Entities resolve(map[str, Package] pkgs) {
 	//   if a package imports 2 packages that export the same name it is an error
 	//	  (here we assume this has already been checked for)
 	
-	// approach:
-	//   encounter a defined name: qualify it with pkg we're in
-	//    put it in a table for this pkg (shortname -> longname)
-	// then: a used name is looked up in the table for the current pkg
-	//   if not found, chase imports of pkg to find
-	
-	//map[str, set[str]] import
+	for (k <- pkgs, success(l, pkg) := pkgs[k]) {
+		imps = imports(pkg) + {pkg.name};
+		pkg = visit (pkg) {
+			case Name n:name(str x): {
+				if (i <- imps, success(_, p2) := pkgs[i], x in exports(p2)) {
+					insert qualified(p2.name, x)[@location=n@location];
+				}
+				throw "Undefined or unimported name <x>";
+			}
+		}
+		pkgs[k] = success(l, pkg);
+	}
+	return pkgs;
 }
 
