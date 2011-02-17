@@ -28,8 +28,8 @@ public ColumnType type2columnType(Type t) {
 	switch (t) {
 		case primitive(PrimitiveType::string()): 	return ColumnType::varchar(); 
      	case primitive(PrimitiveType::date()): 		return ColumnType::date();
-     	case primitive(PrimitiveType::integer()): 	return ColumnType::Type::integer();
-     	case primitive(PrimitiveType::boolean()): 	return ColumnType::Type::boolean();
+     	case primitive(PrimitiveType::integer()): 	return ColumnType::integer();
+     	case primitive(PrimitiveType::boolean()): 	return ColumnType::boolean();
      	case reference(str req): 					return ColumnType::integer();
      	default: throw "Unhandled type: <t>";	
 	}

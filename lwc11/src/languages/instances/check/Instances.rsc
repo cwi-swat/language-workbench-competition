@@ -6,16 +6,17 @@ import languages::instances::ast::Instances;
 import Node;
 import Map;
 import IO;
+import Message;
 
-public list[str] check(Instances is, Entities es) {
+public list[Message] check(Instances is, Entities es) {
 	edefs = ( e.name: e | e <- es.entities );
 	idefs = ();
 	errors = for (i <- is.instances) {
 		if (i.\type notin edefs) {
-		  	append "Declared type of <i.name> (<i.\type>) is undefined.";
+		  	append error("Declared type of <i.name> (<i.\type>) is undefined.", i@location);
 		}
 		if (i.name in idefs) {
-			append "Duplicate instance <i.name>.";
+			append error("Duplicate instance <i.name>.", i@location);
 		}
 		idefs[i.name] = i.\type;
 	}
@@ -23,27 +24,26 @@ public list[str] check(Instances is, Entities es) {
 					| i <- is.instances, i.\type in edefs );
 }
 
-public list[str] checkInstance(Instance i, map[str, str] idefs, Entity e) {
+public list[Message] checkInstance(Instance i, map[str, str] idefs, Entity e) {
 	fdefs = ( f.name: f.\type | f <- e.fields );
 	
-	list[str] errors = [ "Field <a.name> in <i.name> is undefined in <e.name>" 
+	list[Message] errors = [ error("Field <a.name> in <i.name> is undefined in <e.name>", a@location) 
 					| a <- i.assigns, a.name notin fdefs ];
 	
-	errors += [ "Field <a.name> in <i.name> references undefined instance <n>"
+	errors += [ error("Field <a.name> in <i.name> references undefined instance <n>", a@location)
 					| a <- i.assigns,  Value::reference(str n) := a.\value, n notin idefs ];
 				
-	println(errors);
-	errors += [ "Required field <e.name>.<n> is missing in <i.name>" 
+	errors += [ error("Required field <e.name>.<n> is missing in <i.name>", i@location) 
 					| n <- domain(fdefs) - { a.name | a <- i.assigns } ];
 	
-	return ( errors | it + checkTypes("<i.name>.<a.name>", fdefs[a.name], a.\value, idefs) 
+	return ( errors | it + checkTypes(a, fdefs[a.name], a.\value, idefs) 
 					| a <- i.assigns, a.name in fdefs );
 }
 
 
-public list[str] checkTypes(str f, Type t, Value v, map[str, str] idefs) {
-	list[str] typeError() {
-		return ["Expected type <getName(t.primitive)> for <f> but got <getName(v)>"];
+public list[Message] checkTypes(Assign a, Type t, Value v, map[str, str] idefs) {
+	list[Message] typeError() {
+		return [error("Expected type <getName(t.primitive)> for <a.name> but got <getName(v)>", v@location)];
 	}	
 
    	switch (<t, v>) {
@@ -53,11 +53,11 @@ public list[str] checkTypes(str f, Type t, Value v, map[str, str] idefs) {
      	case <primitive(boolean()), !boolean(_)>: return typeError();
      	
      	case <reference(str req), !reference(_)>:
-     			return ["Expected a reference to <req> for <f> but got <getName(v)>"];
+     			return [error("Expected a reference to <req> for <a.name> but got <getName(v)>", v@location)];
      	
      	case <reference(str req), _>:  
      		if (actual := idefs[v.name], actual != req) {
-     	    	return ["Instance <v.name> referenced by field <f> should have type <req> but is <actual>"];
+     	    	return [error("Instance <v.name> referenced by field <a.name> should have type <req> but is <actual>", v@location) ];
      		}
      	  
     	default: throw "Unhandled type: <t>";

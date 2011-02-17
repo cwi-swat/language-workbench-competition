@@ -19,3 +19,8 @@ data PrimitiveType
 	| integer()
 	| boolean();
 
+anno loc Entities@location;
+anno loc Entity@location;
+anno loc Field@location;
+anno loc Type@location;
+

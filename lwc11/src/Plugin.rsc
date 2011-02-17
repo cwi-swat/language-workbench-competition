@@ -1,11 +1,9 @@
 module Plugin
 
-import SourceEditor;
-import languages::entities::syntax::Entities;
-import ParseTree;
+import languages::entities::ide::Entities;
+import languages::instances::ide::Instances;
 
 public void main() {
-  registerLanguage("Entities", "entities", Tree (str x) {
-    return parse(#Entities, x);
-  });
+	registerEntities();
+	registerInstances();
 }

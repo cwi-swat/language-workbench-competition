@@ -13,9 +13,9 @@ syntax Assign
 	= assign: Ident "=" Value;
 	
 syntax Value 
-	= date: Int "." Int "." Int
-	| string: Str
-	| integer: Int
+	= @category="Constant" date: Int "." Int "." Int
+	| @category="Constant" string: Str
+	| @category="Constant" integer: Int
 	| reference: Ident;
 	
 syntax Int

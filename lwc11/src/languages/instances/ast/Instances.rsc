@@ -15,3 +15,8 @@ data Value
 	| integer(int intValue)
 	| boolean(bool boolValue)
 	| reference(str name);
+
+anno loc Instances@location;
+anno loc Instance@location;
+anno loc Assign@location;
+anno loc Value@location;

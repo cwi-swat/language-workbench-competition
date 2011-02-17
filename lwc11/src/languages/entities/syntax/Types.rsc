@@ -7,8 +7,8 @@ import languages::entities::syntax::Ident;
 // in package version of entities.
 
 syntax Type 
-	= primitive: PrimitiveType
-	| reference: Ident;
+	= @category="Type" primitive: PrimitiveType
+	| @category="Type" reference: Ident;
 
 syntax PrimitiveType 
 	= string: "string" 
