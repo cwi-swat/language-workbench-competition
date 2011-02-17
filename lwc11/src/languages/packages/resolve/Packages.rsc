@@ -16,6 +16,7 @@ public map[str, LoadResult] resolve(map[str, LoadResult] pkgs) {
 	//	 entities are declared out of order and may have cyclic deps
 	//   if a package imports 2 packages that export the same name it is an error
 	//	  (here we assume this has already been checked for)
+	//    (resolve will actually resolve them, hiding the error)
 	
 	for (k <- pkgs, success(l, pkg) := pkgs[k]) {
 		imps = imports(pkg) + {pkg.name};

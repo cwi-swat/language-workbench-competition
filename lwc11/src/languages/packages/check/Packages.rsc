@@ -18,6 +18,8 @@ public list[Message] check(map[str, LoadResult] pkgs) {
 	errors += [ error("Declaration of qualified name <p2>.<n2> that does not correspond to package name <n>", q@location) 
 				| n <- pkgs, success(_, pkg) := pkgs[n],  
 				  /entity(q:qualified(p2, n2), _) <- pkg, p2 != n ];  
+				  
+	// TODO: check that package name corresponds to filename
 				
 	return ( errors | it + checkImports(pkg, pkgs) | n <- pkgs, success(_, pkg) := pkgs[n]);
 }
