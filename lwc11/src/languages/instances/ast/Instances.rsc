@@ -1,10 +1,12 @@
 module languages::instances::ast::Instances
 
+import languages::entities::ast::Entities; // for Name
+
 data Instances
 	= instances(list[Instance] instances);
 	
 data Instance
-	= instance(str \type, str name, list[Assign] assigns);
+	= instance(Name \type, Name name, list[Assign] assigns);
 	
 data Assign
 	= assign(str name, Value \value);
@@ -14,7 +16,7 @@ data Value
 	| string(str strValue)
 	| integer(int intValue)
 	| boolean(bool boolValue)
-	| reference(str name);
+	| reference(Name name);
 
 anno loc Instances@location;
 anno loc Instance@location;

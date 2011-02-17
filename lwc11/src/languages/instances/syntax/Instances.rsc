@@ -7,7 +7,7 @@ start syntax Instances
 	= instances: Instance*;
 	
 syntax Instance
-	= instance: Ident Ident "=" "{" Assign* "}";
+	= instance: Name Name "=" "{" Assign* "}";
 	
 syntax Assign
 	= assign: Ident "=" Value;
@@ -16,7 +16,7 @@ syntax Value
 	= @category="Constant" date: Int "." Int "." Int
 	| @category="Constant" string: Str
 	| @category="Constant" integer: Int
-	| reference: Ident;
+	| reference: Name;
 	
 syntax Int
 	= lex [0-9]+ # [0-9];

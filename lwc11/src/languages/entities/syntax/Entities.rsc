@@ -8,7 +8,7 @@ start syntax Entities
 	= entities: Entity*;
 
 syntax Entity 
-    = entity: "entity" Ident "{" Field* "}";
+    = entity: "entity" Name "{" Field* "}";
 
 syntax Field 
     = field: Type Ident;

@@ -6,7 +6,7 @@ import String;
 public list[str] entities2java(Entities es) {
 	return for (e <- es.entities) {
 		append "
-public class <e.name> {
+public class <e.name.name> {
 <for (f <- e.fields) {>
 <field2java(f)>
 <}>
@@ -40,7 +40,7 @@ public str type2java(Type t) {
 		case primitive(date()): 	return "java.util.Date";
 		case primitive(integer()):	return "java.lang.Integer";
 		case primitive(boolean()):	return "java.lang.Boolean";
-		case reference(str n): 		return n;
+		case reference(Name n): 	return n.name;
 		default: throw "Unhandled type: <t>";
 	}
 }

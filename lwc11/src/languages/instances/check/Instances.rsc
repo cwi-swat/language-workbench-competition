@@ -24,7 +24,7 @@ public list[Message] check(Instances is, Entities es) {
 					| i <- is.instances, i.\type in edefs );
 }
 
-public list[Message] checkInstance(Instance i, map[str, str] idefs, Entity e) {
+public list[Message] checkInstance(Instance i, map[Name, Name] idefs, Entity e) {
 	fdefs = ( f.name: f.\type | f <- e.fields );
 	
 	list[Message] errors = [ error("Field <a.name> in <i.name> is undefined in <e.name>", a@location) 
@@ -41,26 +41,25 @@ public list[Message] checkInstance(Instance i, map[str, str] idefs, Entity e) {
 }
 
 
-public list[Message] checkTypes(Assign a, Type t, Value v, map[str, str] idefs) {
+public list[Message] checkTypes(Assign a, Type t, Value v, map[Name, Name] idefs) {
 	list[Message] typeError() {
 		return [error("Expected type <getName(t.primitive)> for <a.name> but got <getName(v)>", v@location)];
 	}	
 
    	switch (<t, v>) {
-    	case <primitive(string()), !string(_)>:   return typeError();
-     	case <primitive(date()), !date(_, _, _)>: return typeError();
-     	case <primitive(integer()), !integer(_)>: return typeError();
-     	case <primitive(boolean()), !boolean(_)>: return typeError();
+    	case <primitive(string()), !Value::string(_)>:   return typeError();
+     	case <primitive(date()), !Value::date(_, _, _)>: return typeError();
+     	case <primitive(integer()), !Value::integer(_)>: return typeError();
+     	case <primitive(boolean()), !Value::boolean(_)>: return typeError();
      	
-     	case <reference(str req), !reference(_)>:
+     	case <reference(Name req), !reference(_)>:
      			return [error("Expected a reference to <req> for <a.name> but got <getName(v)>", v@location)];
      	
-     	case <reference(str req), _>:  
+     	case <reference(Name req), _>:  
      		if (actual := idefs[v.name], actual != req) {
      	    	return [error("Instance <v.name> referenced by field <a.name> should have type <req> but is <actual>", v@location) ];
      		}
      	  
-    	default: throw "Unhandled type: <t>";
    }
    return [];
 }

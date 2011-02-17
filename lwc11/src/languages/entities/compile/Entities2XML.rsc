@@ -10,7 +10,7 @@ public Node entities2xml(Entities es) {
 }
 
 public Node entity2element(Entity e) {
-	a = attribute(none(), "name", e.name);
+	a = attribute(none(), "name", e.name.name);
 	return element(none(), "entity", [a] + [ field2element(f) | f <- e.fields ]); 
 }
 
@@ -21,7 +21,7 @@ public Node field2element(Field f) {
 	}
 	else {
 		attrs += [attribute(none(), "type", "ref"),
-					attribute(none(), "references", f.\type.name)];
+					attribute(none(), "references", f.\type.name.name)];
 	}
 	return element(none(), "field", attrs); 
 }

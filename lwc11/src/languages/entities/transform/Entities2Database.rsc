@@ -12,13 +12,13 @@ public Database entities2database(Entities es) {
 
 public Table entity2table(Entity e) {
 	cols = [column(KEY, integer(), [key()])] + [ field2column(f) | f <- e.fields ];
-	return table(e.name, cols); 
+	return table(e.name.name, cols); 
 }
 
 public Column field2column(Field f) {
 	t = type2columnType(f.\type);
 	cs = [];
-	if (reference(e) := f.\type) {
+	if (reference(name(e)) := f.\type) {
 		cs = [references(e, KEY)];
 	}
 	return column(f.name, t, cs);
@@ -30,7 +30,7 @@ public ColumnType type2columnType(Type t) {
      	case primitive(PrimitiveType::date()): 		return ColumnType::date();
      	case primitive(PrimitiveType::integer()): 	return ColumnType::integer();
      	case primitive(PrimitiveType::boolean()): 	return ColumnType::boolean();
-     	case reference(str req): 					return ColumnType::integer();
+     	case reference(_): 							return ColumnType::integer();
      	default: throw "Unhandled type: <t>";	
 	}
 }
