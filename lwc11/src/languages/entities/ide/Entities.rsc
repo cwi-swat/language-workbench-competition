@@ -17,7 +17,9 @@ public void registerEntities() {
   registerLanguage("Entities", "entities", Tree (str x) {
     return parse(#languages::entities::syntax::Entities::Entities, x);
   });
-  
+
+/* 
+  // This causes an infinite loop currently; the markers trigger a document change
   registerAnnotator("Entities", languages::entities::syntax::Entities::Entities (languages::entities::syntax::Entities::Entities input) {
   		Tree pt = input;
   		ast = implode(#languages::entities::ast::Entities::Entities, pt);
@@ -26,4 +28,5 @@ public void registerEntities() {
   		return pt;
 	}
   );
+*/
 }

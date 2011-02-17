@@ -2,4 +2,5 @@ entity Person {
 	string name
 	string firstName
 	date birthDate
+	date birthDate
 }

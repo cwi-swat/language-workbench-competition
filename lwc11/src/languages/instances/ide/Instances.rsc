@@ -19,7 +19,8 @@ public void registerInstances() {
   registerLanguage("Instances", "instances", Tree (str x) {
     	return parse(#languages::instances::syntax::Instances::Instances, x);
   });
-  
+
+/*  
   registerAnnotator("Instances", languages::instances::syntax::Instances::Instances (languages::instances::syntax::Instances::Instances input) {
   		Tree pt = input;
   		ast = implode(#languages::instances::ast::Instances::Instances, pt);
@@ -28,4 +29,5 @@ public void registerInstances() {
   		return pt;
 	}
   );
+*/
 }

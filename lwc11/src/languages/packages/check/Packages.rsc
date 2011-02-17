@@ -1,14 +1,27 @@
 module languages::packages::check::Packages
 
 import languages::packages::ast::Packages;
-import languages::entities::ast::Entities; // for anno on Name
+import languages::entities::ast::Entities;
+import languages::entities::check::Entities;
 import languages::packages::utils::Load;
+import languages::packages::resolve::Packages;
 
 import Message;
 import Relation;
 import IO;
+import Map;
 
-public list[Message] check(map[str, LoadResult] pkgs) {
+public list[Message] check(loc path, str name) {
+	WorkingSet ws = load(path, name);
+	errors = check(ws);
+	ws = resolve(ws);
+	es = [ e | /success(_, pkg) := ws, /Entity e := pkg ];
+	for (x <- es) println(es);
+	ent = entities(es);
+	return errors + check(ent);
+}
+
+public list[Message] check(WorkingSet pkgs) {
 	// can assume that all imported packagenames of all packages
 	// are in the domain of pkgs. (this follows from Load)
 	
@@ -24,7 +37,7 @@ public list[Message] check(map[str, LoadResult] pkgs) {
 	return ( errors | it + checkImports(pkg, pkgs) | n <- pkgs, success(_, pkg) := pkgs[n]);
 }
 
-public list[Message] checkImports(Package pkg, map[str, LoadResult] pkgs) {
+public list[Message] checkImports(Package pkg, WorkingSet pkgs) {
 	names = { <n, pkg.name> | n <- exports(pkg) };
 	list[Message] errors = [];
 	for (i <- imports(pkg), success(_, pkg2) := pkgs[i]) {

@@ -4,6 +4,8 @@ package person {
 		string name
 		string firstName
 		date birthDate
-		car.Car ownedCar
+		date birthDate
+		integer ownedCar
+		car.Car2 ownedCar
 	}
 }
