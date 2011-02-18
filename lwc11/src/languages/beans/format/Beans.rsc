@@ -29,10 +29,10 @@ public Box bean2box(Bean bean) {
 			KW(L("public")), KW(L("class")), VAR(L(bean.name)), L("{")
 		])[@hs=1],
 		I([
-			V(
-				[ attr2box(a) | a <- bean.attributes ]
-				+ [acc2box(a) | a <- bean.accessors ]
-			)
+			V([
+				V([ attr2box(a) | a <- bean.attributes ]),
+				V([ acc2box(a) | a <- bean.accessors ])
+			])[@vs=1]
 		]),
 		L("}")
 	]);		
