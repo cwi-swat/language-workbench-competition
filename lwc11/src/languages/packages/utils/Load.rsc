@@ -13,7 +13,7 @@ data LoadResult
 
 alias WorkingSet = map[str pkgName, LoadResult result];
 
-// a map from package to a set of package that import it.
+// a map from packagename to the set of packages that import it.
 alias Todo = map[str, set[Package]];
 
 public WorkingSet loadAll(loc path, Package pkg) {
@@ -47,10 +47,6 @@ public WorkingSet loadPackages(loc path, Todo todo) {
 loc packagePath(loc path, str name) {
 	return |<path.scheme>://<path.host>/<path.path>/<name>.<EXT>|;
 }
-
-//public rel[str, loc] requiredPackages(Package pkg) {
-//	return { <i.name, i@location> | Import i <- pkg.imports } + { <q.pkg, q@location> | /q:qualified(_, _) <- pkg };
-//}
 
 public set[str] requiredPackages(Package pkg) {
 	return { i.name | Import i <- pkg.imports } + { q.pkg | /q:qualified(_, _) <- pkg };

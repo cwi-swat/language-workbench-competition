@@ -3,5 +3,5 @@ entity Person {
 	string firstName
 	date birthDate
 	date birthDate
-	Car2 ownedCar
+	integer age = 10 * birthdate 
 }

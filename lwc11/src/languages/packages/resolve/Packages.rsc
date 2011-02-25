@@ -7,7 +7,7 @@ import languages::packages::utils::Load;
 
 import IO;
 
-public map[str, LoadResult] resolve(map[str, LoadResult] pkgs) {
+public WorkingSet resolve(WorkingSet pkgs) {
 	// replace all identifiers with long identifiers
 	// assumptions: all imports  are in pkgs
 	//   there may be cycles
