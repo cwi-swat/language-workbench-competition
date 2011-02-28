@@ -51,15 +51,10 @@ public <tn> get<cn>() {
 }
 
 
-public str exp2java(Expression exp) {
-	switch (exp) {
-	 	case nat(n): 		return "<n>";
-		case field(n):		return "this.<n>";
-		case neg(a):		return "(-<exp2java(a)>)";
-		case mul(lhs, rhs):	return "(<exp2java(lhs)> * <exp2java(rhs)>)";
-		case div(lhs, rhs):	return "(<exp2java(lhs)> / <exp2java(rhs)>)";
-		case add(lhs, rhs):	return "(<exp2java(lhs)> + <exp2java(rhs)>)";
-		case sub(lhs, rhs):	return "(<exp2java(lhs)> - <exp2java(rhs)>)";
-		default: throw "Unhandled expression: <exp>";
-	}
-}
+public str exp2java(nat(n)) 		= "<n>";
+public str exp2java(field(n))		= "this.<n>";
+public str exp2java(neg(a))			= "(-<exp2java(a)>)";
+public str exp2java(mul(lhs, rhs))	= "(<exp2java(lhs)> * <exp2java(rhs)>)";
+public str exp2java(div(lhs, rhs))	= "(<exp2java(lhs)> / <exp2java(rhs)>)";
+public str exp2java(add(lhs, rhs))	= "(<exp2java(lhs)> + <exp2java(rhs)>)";
+public str exp2java(sub(lhs, rhs))	= "(<exp2java(lhs)> - <exp2java(rhs)>)";

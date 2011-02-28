@@ -32,10 +32,10 @@ public void set<cn>(<t> <n>) {
 ";
 }
 
-public str type2java(primitive(string())) = "java.lang.String";
-public str type2java(primitive(date())) = "java.util.Date";
-public str type2java(primitive(integer())) = "java.lang.Integer";
-public str type2java(primitive(boolean())) = "java.lang.Boolean";
-public str type2java(reference(name(str n))) = n;
+public str type2java(primitive(string())) = 	"java.lang.String";
+public str type2java(primitive(date())) = 		"java.util.Date";
+public str type2java(primitive(integer())) = 	"java.lang.Integer";
+public str type2java(primitive(boolean())) = 	"java.lang.Boolean";
+public str type2java(reference(name(str n))) = 	n;
 
 

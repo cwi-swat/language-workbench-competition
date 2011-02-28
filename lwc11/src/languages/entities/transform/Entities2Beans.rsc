@@ -16,13 +16,9 @@ public Bean entity2bean(Entity e) {
 	);
 }
 
-public str beanType(Type t) {
-	switch (t) {
-		case primitive(PrimitiveType::string()): 	return "java.lang.String"; 
-     	case primitive(PrimitiveType::date()): 		return "java.util.Date";
-     	case primitive(PrimitiveType::integer()): 	return "java.lang.Integer";
-     	case primitive(PrimitiveType::boolean()): 	return "java.lang.Boolean";
-     	case reference(Name n): 					return n.name;
-     	default: throw "Unhandled type: <t>";	
-	}
-}
+public str beanType(primitive(string())) = 		"java.lang.String";
+public str beanType(primitive(date())) = 		"java.util.Date";
+public str beanType(primitive(integer())) = 	"java.lang.Integer";
+public str beanType(primitive(boolean())) = 	"java.lang.Boolean";
+public str beanType(reference(name(str n))) = 	n;
+
