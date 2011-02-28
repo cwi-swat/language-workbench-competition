@@ -21,9 +21,10 @@ import SourceEditor;
 
 public void registerInstances() {
   registerLanguage("Instances", "instances", Tree (str x, loc l) {
-    	return annotateWithLinks(parse(#languages::instances::syntax::Instances::Instances, x, l));
+    	return parse(#languages::instances::syntax::Instances::Instances, x, l);
   });
   registerOutliner("Instances", outlineInstances);
+  registerAnnotator("Instances", annotateWithLinks);
 
 /*  
   registerAnnotator("Instances", languages::instances::syntax::Instances::Instances (languages::instances::syntax::Instances::Instances input) {

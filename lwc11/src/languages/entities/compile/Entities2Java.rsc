@@ -32,14 +32,10 @@ public void set<cn>(<t> <n>) {
 ";
 }
 
-public str type2java(Type t) {
-	switch (t) {
-		case primitive(string()): 	return "java.lang.String";
-		case primitive(date()): 	return "java.util.Date";
-		case primitive(integer()):	return "java.lang.Integer";
-		case primitive(boolean()):	return "java.lang.Boolean";
-		case reference(Name n): 	return n.name;
-		default: throw "Unhandled type: <t>";
-	}
-}
-	
+public str type2java(primitive(string())) = "java.lang.String";
+public str type2java(primitive(date())) = "java.util.Date";
+public str type2java(primitive(integer())) = "java.lang.Integer";
+public str type2java(primitive(boolean())) = "java.lang.Boolean";
+public str type2java(reference(name(str n))) = n;
+
+
