@@ -9,8 +9,7 @@ public Figure entities2figure(Entities es) {
 	nodes = [ entity2figure(e) | e <- es.entities ];
 	println(nodes);
 	arrow = triangle(5);
-	edges = [ edge(name2id(e.name), name2id(n), arrow) 
-				| e <- es.entities, /reference(n) := e ];
+	edges = [ edge(name2id(e.name), name2id(n), arrow) | e <- es.entities, /reference(n) := e ];
 	println(edges);
 	return graph(nodes, edges, hint("layered"), size(400));
 }

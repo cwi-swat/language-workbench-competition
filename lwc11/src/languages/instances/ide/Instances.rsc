@@ -10,6 +10,8 @@ import languages::instances::ast::Instances;
 import languages::entities::ast::Entities;
 
 import languages::instances::ide::Outline;
+import languages::instances::ide::Links;
+
 
 import List;
 import ParseTree;
@@ -19,7 +21,7 @@ import SourceEditor;
 
 public void registerInstances() {
   registerLanguage("Instances", "instances", Tree (str x, loc l) {
-    	return parse(#languages::instances::syntax::Instances::Instances, x, l);
+    	return annotateWithLinks(parse(#languages::instances::syntax::Instances::Instances, x, l));
   });
   registerOutliner("Instances", outlineInstances);
 
