@@ -16,8 +16,8 @@ import SourceEditor;
 
 
 public void registerInstances() {
-  registerLanguage("Instances", "instances", Tree (str x) {
-    	return parse(#languages::instances::syntax::Instances::Instances, x);
+  registerLanguage("Instances", "instances", Tree (str x, loc l) {
+    	return parse(#languages::instances::syntax::Instances::Instances, x, l);
   });
 
 /*  

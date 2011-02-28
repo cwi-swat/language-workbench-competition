@@ -12,11 +12,11 @@ public list[str] derived2java(Entities es) {
 			append "
 	public class <e.name.name> {
 	<for (f <- e.fields) {>
-	<if (f is annotated) {>
-		<annotated2java(f, e)>
-	<} else {>
-		<field2java(f)>
-	<}>
+		<if (f is annotated) {>
+			<annotated2java(f, e)>
+		<} else {>
+			<field2java(f)>
+		<}>
 	<}>
 	}
 	";
@@ -36,6 +36,8 @@ public <tn> get<cn>() {
 ";
 }
 
+// this could be field2java if the current entity would be 
+// a dynamic variable in derived2java (seen here). 
 public str annotated2java(Field f, Entity e) {
 	<tn, cn> = <type2java(f.\type), capitalize(f.name)>;
 	gs = [ "get<capitalize(other.name)>()" | other <- e.fields, other != f ];

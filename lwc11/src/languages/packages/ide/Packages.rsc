@@ -14,7 +14,7 @@ import ParseTree;
 public str PACKAGE_EXTENSION = "package";
 
 public void registerPackages() {
-  registerLanguage("Packages", PACKAGE_EXTENSION, Tree (str x) {
-    return parse(#languages::packages::syntax::Packages::Package, x);
+  registerLanguage("Packages", PACKAGE_EXTENSION, Tree (str x, loc l) {
+    return parse(#languages::packages::syntax::Packages::Package, x, l);
   });
 }
