@@ -19,10 +19,6 @@ public str capitalize(str s) {
   return toUpperCase(substring(s, 0, 1)) + substring(s, 1);
 }
 
-public str default field2java(Field f) {
-	throw "<f>";
-}
-
 public str field2java(field(typ, n)) {
 	<t, cn> = <type2java(typ), capitalize(n)>;
 	return "

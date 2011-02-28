@@ -7,7 +7,12 @@ import languages::entities::syntax::Entities;
 
 syntax Field 
 	= derived: Type Ident "=" Expression
+	| annotated: Annotation Type Ident 
 	;
+	
+syntax Annotation
+	= annotation: "@" Ident "(" String ")"
+	; 
 	
 syntax Expression
 	= nat: Natural value
@@ -24,6 +29,15 @@ syntax Expression
 		add: Expression lhs "+" Expression rhs
 		| sub: Expression lhs "-" Expression rhs
 	);
+	
+syntax String
+	= lex [\"] StrChar* [\"]
+	;
+
+syntax StrChar
+	= lex ![\\\"]
+	| [\\][\"]
+	;
 	
 syntax Natural
 	= lex [0-9]+

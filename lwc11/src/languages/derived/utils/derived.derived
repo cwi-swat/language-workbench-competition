@@ -4,4 +4,7 @@ entity Person {
 	date birthDate
 	date birthDate
 	integer age = 10 * birthdate 
+	
+	@host("persons.utils.Util.computeAmount")
+	integer amount
 }

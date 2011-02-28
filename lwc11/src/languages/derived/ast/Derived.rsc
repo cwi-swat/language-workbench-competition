@@ -3,7 +3,13 @@ module languages::derived::ast::Derived
 import languages::entities::ast::Entities;
 
 data Field
-	= derived(Type \type, str name, Expression exp);
+	= derived(Type \type, str name, Expression exp)
+	| annotated(Annotation annotation, Type \type, str name)
+	;
+	
+data Annotation
+	= annotation(str name, str string)
+	;
 
 data Expression
 	= nat(int intValue)
