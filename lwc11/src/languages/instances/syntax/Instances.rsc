@@ -4,16 +4,16 @@ import languages::entities::syntax::Ident;
 import languages::entities::syntax::Layout;
 
 start syntax Instances
-	= instances: Require* Instance*;
+	= instances: Require* requires Instance* instances;
 
 syntax Require
-	= require: "require" Ident;
+	= require: "require" Ident name;
 
 syntax Instance
-	= @Foldable instance: Name Name "=" "{" Assign* "}";
+	= @Foldable instance: Name entity Name name "=" "{" Assign* "}";
 	
 syntax Assign
-	= assign: Ident "=" Value;
+	= assign: Ident name "=" Value;
 	
 syntax Value 
 	= @category="Constant" date: Int "." Int "." Int

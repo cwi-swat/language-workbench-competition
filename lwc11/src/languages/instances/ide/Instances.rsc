@@ -9,6 +9,8 @@ import languages::instances::check::Instances;
 import languages::instances::ast::Instances;
 import languages::entities::ast::Entities;
 
+import languages::instances::ide::Outline;
+
 import List;
 import ParseTree;
 import SourceEditor;
@@ -19,6 +21,7 @@ public void registerInstances() {
   registerLanguage("Instances", "instances", Tree (str x, loc l) {
     	return parse(#languages::instances::syntax::Instances::Instances, x, l);
   });
+  registerOutliner("Instances", outlineInstances);
 
 /*  
   registerAnnotator("Instances", languages::instances::syntax::Instances::Instances (languages::instances::syntax::Instances::Instances input) {
