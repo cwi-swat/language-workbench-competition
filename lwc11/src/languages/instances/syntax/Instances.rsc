@@ -10,7 +10,7 @@ syntax Require
 	= require: "require" Ident;
 
 syntax Instance
-	= instance: Name Name "=" "{" Assign* "}";
+	= @Foldable instance: Name Name "=" "{" Assign* "}";
 	
 syntax Assign
 	= assign: Ident "=" Value;
