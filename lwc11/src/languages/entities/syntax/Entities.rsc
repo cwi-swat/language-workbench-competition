@@ -8,10 +8,10 @@ start syntax Entities
 	= entities: Entity* entities;
 
 syntax Entity 
-    = entity: "entity" Name name "{" Field* "}";
+    = @Foldable entity: "entity" Name name "{" Field* "}";
 
 syntax Field 
-    = field: Type Ident;
+    = field: Type Ident name;
 
 
 
