@@ -51,10 +51,10 @@ public <tn> get<cn>() {
 }
 
 
-public str exp2java(nat(n)) 		= "<n>";
-public str exp2java(field(n))		= "this.<n>";
-public str exp2java(neg(a))			= "(-<exp2java(a)>)";
-public str exp2java(mul(lhs, rhs))	= "(<exp2java(lhs)> * <exp2java(rhs)>)";
-public str exp2java(div(lhs, rhs))	= "(<exp2java(lhs)> / <exp2java(rhs)>)";
-public str exp2java(add(lhs, rhs))	= "(<exp2java(lhs)> + <exp2java(rhs)>)";
-public str exp2java(sub(lhs, rhs))	= "(<exp2java(lhs)> - <exp2java(rhs)>)";
+public str exp2java(nat(n)) 					= "<n>";
+public str exp2java(Expression::field(n))		= "this.<n>";
+public str exp2java(neg(a))						= "(-<exp2java(a)>)";
+public str exp2java(mul(lhs, rhs))				= "(<exp2java(lhs)> * <exp2java(rhs)>)";
+public str exp2java(div(lhs, rhs))				= "(<exp2java(lhs)> / <exp2java(rhs)>)";
+public str exp2java(add(lhs, rhs))				= "(<exp2java(lhs)> + <exp2java(rhs)>)";
+public str exp2java(sub(lhs, rhs))				= "(<exp2java(lhs)> - <exp2java(rhs)>)";
