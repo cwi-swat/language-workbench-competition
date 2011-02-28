@@ -3,6 +3,7 @@ module languages::entities::ide::Check
 import languages::entities::ast::Entities;
 import languages::entities::syntax::Entities;
 import languages::entities::check::Entities;
+import List;
 
 import ParseTree;
 
