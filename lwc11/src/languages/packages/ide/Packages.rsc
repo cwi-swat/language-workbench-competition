@@ -8,13 +8,15 @@ import languages::entities::syntax::Ident;
 import languages::entities::syntax::Types;
 
 import languages::packages::ast::Packages;
+import languages::packages::ide::Outline;
 
 import ParseTree;
 
 public str PACKAGE_EXTENSION = "package";
 
 public void registerPackages() {
-  registerLanguage("Packages", PACKAGE_EXTENSION, Tree (str x, loc l) {
-    return parse(#languages::packages::syntax::Packages::Package, x, l);
-  });
+ 	registerLanguage("Packages", PACKAGE_EXTENSION, Tree (str x, loc l) {
+    	return parse(#languages::packages::syntax::Packages::Package, x, l);
+  	});
+  	registerOutliner("Packages", outlinePackage);
 }

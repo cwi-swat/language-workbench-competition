@@ -6,10 +6,10 @@ import languages::entities::syntax::Types;
 import languages::entities::syntax::Ident;
 
 start syntax Package
-	= package: "package" Ident "{" Import* Entities "}";
+	= package: "package" Ident name "{" Import* imports Entities entities "}";
 
 syntax Import
-	= imp: "import" Ident;
+	= imp: "import" Ident name;
 
 // Extension
 syntax Name
