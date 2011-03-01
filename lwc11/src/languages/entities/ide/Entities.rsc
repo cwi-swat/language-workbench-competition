@@ -20,7 +20,7 @@ public void registerEntities() {
     	return parse(#languages::entities::syntax::Entities::Entities, x, l);
   	});
   
-  	//registerAnnotator("Entities", checkAndAnnotatePT);
+  	registerAnnotator("Entities", checkAndAnnotatePT);
 	registerOutliner("Entities", outlineEntities);
 }   
 

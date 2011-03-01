@@ -12,11 +12,11 @@ anno loc Ident@link;
 public Instances annotateWithLinks(Instances is) {
 	ns = ( i.name.id: i.name@\loc | /Instance i := is );
 	return visit (is) {
-		case (Value)`<Ident n>`: {
+		case Value v => visit(v) { case Ident n :
 			if (n in ns) {
 				n@link = ns[n];
 				println("Adding link to <n> ( <ns[n]> )");
-				insert (Value)`<Ident n>`;
+				insert n;
 			}
 			else {
 				fail;
