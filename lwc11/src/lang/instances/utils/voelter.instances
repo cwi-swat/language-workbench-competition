@@ -5,6 +5,7 @@ Person p = {
 	name = "Voelter"
 	birthDate = 14.02.1927
 	ownedCar = c
+	ownedCar = ddddddd
 }
 
 Car c = {

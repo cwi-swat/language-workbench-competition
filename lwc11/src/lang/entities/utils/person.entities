@@ -5,3 +5,7 @@ entity Person {
 	date birthDate
 	Car2 ownedCar
 }
+
+entity Person {
+	date birt
+}

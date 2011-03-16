@@ -23,7 +23,7 @@ public WorkingSet resolve(WorkingSet pkgs) {
 		pkg = visit (pkg) {
 			case Name n:name(str x): {
 				if (i <- imps, success(_, p2) := pkgs[i], x in exports(p2)) {
-					insert qualified(p2.name, x)[@location=n@location][@print=x];
+					insert qualified(p2.name, x)[@location=n@location];
 				}
 				throw "Undefined or unimported name <x>";
 			}

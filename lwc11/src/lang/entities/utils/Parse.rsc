@@ -9,6 +9,9 @@ import languages::entities::ast::Entities;
 import ParseTree;
 
 public languages::entities::ast::Entities::Entities parse(loc file) {
-	pt = parse(#languages::entities::syntax::Entities::Entities, file);
-	return implode(#languages::entities::ast::Entities::Entities, pt);
+	return implode(#languages::entities::ast::Entities::Entities, parseTree(file));
+}
+
+public languages::entities::syntax::Entities::Entities parseTree(loc file) {
+	return parse(#languages::entities::syntax::Entities::Entities, file);
 }

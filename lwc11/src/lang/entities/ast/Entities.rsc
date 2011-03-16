@@ -28,4 +28,3 @@ anno loc Field@location;
 anno loc Type@location;
 anno loc Name@location;
 
-anno str Name@print;

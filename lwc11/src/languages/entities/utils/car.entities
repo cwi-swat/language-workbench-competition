@@ -1,4 +1,0 @@
-entity Car2 {
-	string make
-	string model
-}

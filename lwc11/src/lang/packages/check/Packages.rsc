@@ -11,6 +11,10 @@ import Relation;
 import IO;
 import Map;
 
+// TODO: need extend!
+
+public str nameStr(qualified(str pkg, str n)) = n;
+
 public list[Message] check(loc path, str name) {
 	WorkingSet ws = load(path, name);
 	errors = check(ws);
@@ -20,6 +24,7 @@ public list[Message] check(loc path, str name) {
 	ent = entities(es);
 	return errors + check(ent);
 }
+
 
 public list[Message] check(WorkingSet pkgs) {
 	// can assume that all imported packagenames of all packages
