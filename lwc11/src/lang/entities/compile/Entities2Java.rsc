@@ -3,15 +3,16 @@ module lang::entities::compile::Entities2Java
 import lang::entities::ast::Entities;
 import String;
 
-public list[str] entities2java(Entities es) {
-	return for (e <- es.entities) {
-		append "public class <e.name.name> {
-               '<for (f <- e.fields) {>
-               '  <field2java(f)>
-               '<}>
+public rel[str,str] entities2java(Entities es) {
+	return { <e.name.name, entity2java(e)> | e <- es.entities };
 }
-";
-	}	
+
+public str entity2java(Entity e) {
+	return "public class <e.name.name> {
+           '<for (f <- e.fields) {>
+           '  <field2java(f)>
+           '<}>
+		   '}";
 }
 
 public str capitalize(str s) {

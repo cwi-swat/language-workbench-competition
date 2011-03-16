@@ -1,13 +1,11 @@
 entity Car2 {
 /* a car */
 	string make
-	string make
+
 	string model
-	string model
-	string model
-	Car2 bla
+	Car2 bla	
 }
 
-entity Car2 {
-
+entity Car3 {
+    string make
 }
