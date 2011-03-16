@@ -1,8 +1,8 @@
-module languages::instances::ide::Links
+module lang::instances::ide::Links
 
-import languages::instances::syntax::Instances;
-import languages::entities::syntax::Ident;
-import languages::entities::syntax::Layout;
+import lang::instances::syntax::Instances;
+import lang::entities::syntax::Ident;
+import lang::entities::syntax::Layout;
 
 import ParseTree;
 import IO;

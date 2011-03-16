@@ -1,6 +1,6 @@
-module languages::instances::ide::Outline
+module lang::instances::ide::Outline
 
-import languages::instances::syntax::Instances;
+import lang::instances::syntax::Instances;
 
 import ParseTree; // for loc annos
 

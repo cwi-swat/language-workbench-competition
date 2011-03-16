@@ -1,4 +1,4 @@
-module languages::entities::ast::Entities
+module lang::entities::ast::Entities
 
 data Entities 
 	= entities(list[Entity] entities);

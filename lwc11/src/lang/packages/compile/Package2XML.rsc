@@ -1,7 +1,7 @@
-module languages::packages::compile::Package2XML
+module lang::packages::compile::Package2XML
 
-import languages::packages::ast::Packages;
-import languages::entities::compile::Entities2XML;
+import lang::packages::ast::Packages;
+import lang::entities::compile::Entities2XML;
 
 import XMLDOM;
 

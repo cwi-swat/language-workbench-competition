@@ -1,10 +1,10 @@
-module languages::entities::utils::Test
+module lang::entities::utils::Test
 
-import languages::entities::utils::Parse;
-import languages::entities::utils::Merge;
-import languages::entities::ast::Entities;
+import lang::entities::utils::Parse;
+import lang::entities::utils::Merge;
+import lang::entities::ast::Entities;
 
-private str ROOT = "lwc11/src/languages/entities/utils";
+private str ROOT = "lwc11/src/lang/entities/utils";
 
 public Entities personEntities() {
   return parse(|project://<ROOT>/person.entities|);

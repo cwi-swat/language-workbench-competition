@@ -1,8 +1,8 @@
 module Plugin
 
-import languages::entities::ide::Entities;
-import languages::instances::ide::Instances;
-import languages::packages::ide::Packages;
+import lang::entities::ide::Entities;
+import lang::instances::ide::Instances;
+import lang::packages::ide::Packages;
 
 public void main() {
 	registerEntities();

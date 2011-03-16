@@ -1,4 +1,4 @@
-module languages::entities::syntax::Layout
+module lang::entities::syntax::Layout
 
 syntax LAYOUT 
 	= lex whitespace: [\t-\n\r\ ] 

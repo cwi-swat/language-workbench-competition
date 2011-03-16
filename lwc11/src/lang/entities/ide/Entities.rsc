@@ -1,12 +1,12 @@
-module languages::entities::ide::Entities
+module lang::entities::ide::Entities
 
-import languages::entities::syntax::Entities;
-import languages::entities::syntax::Layout;
-import languages::entities::syntax::Ident;
-import languages::entities::syntax::Types;
+import lang::entities::syntax::Entities;
+import lang::entities::syntax::Layout;
+import lang::entities::syntax::Ident;
+import lang::entities::syntax::Types;
 
-import languages::entities::ide::Check;
-import languages::entities::ide::Outline;
+import lang::entities::ide::Check;
+import lang::entities::ide::Outline;
 
 import SourceEditor;
 import List;

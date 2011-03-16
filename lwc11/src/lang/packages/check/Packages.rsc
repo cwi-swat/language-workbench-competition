@@ -1,10 +1,10 @@
-module languages::packages::check::Packages
+module lang::packages::check::Packages
 
-import languages::packages::ast::Packages;
-import languages::entities::ast::Entities;
-import languages::entities::check::Entities;
-import languages::packages::utils::Load;
-import languages::packages::resolve::Packages;
+import lang::packages::ast::Packages;
+import lang::entities::ast::Entities;
+import lang::entities::check::Entities;
+import lang::packages::utils::Load;
+import lang::packages::resolve::Packages;
 
 import Message;
 import Relation;

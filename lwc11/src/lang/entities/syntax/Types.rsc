@@ -1,6 +1,6 @@
-module languages::entities::syntax::Types
+module lang::entities::syntax::Types
 
-import languages::entities::syntax::Ident;
+import lang::entities::syntax::Ident;
 
 syntax Type 
 	= @category="Type" primitive: PrimitiveType

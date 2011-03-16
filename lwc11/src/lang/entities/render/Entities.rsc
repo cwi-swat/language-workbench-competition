@@ -1,6 +1,6 @@
-module languages::entities::render::Entities
+module lang::entities::render::Entities
 
-import languages::entities::ast::Entities;
+import lang::entities::ast::Entities;
 import vis::Figure;
 import IO;
 

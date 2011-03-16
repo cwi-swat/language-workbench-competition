@@ -1,6 +1,6 @@
-module languages::derived::ast::Derived
+module lang::derived::ast::Derived
 
-import languages::entities::ast::Entities;
+import lang::entities::ast::Entities;
 
 data Field
 	= derived(Type \type, str name, Expression exp)

@@ -1,6 +1,6 @@
-module languages::instances::ast::Instances
+module lang::instances::ast::Instances
 
-import languages::entities::ast::Entities; // for Name
+import lang::entities::ast::Entities; // for Name
 
 data Instances
 	= instances(list[Require] requires, list[Instance] instances);

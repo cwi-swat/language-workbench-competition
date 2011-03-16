@@ -1,7 +1,7 @@
-module languages::entities::utils::Merge
+module lang::entities::utils::Merge
 
-import languages::entities::utils::Parse;
-import languages::entities::ast::Entities;
+import lang::entities::utils::Parse;
+import lang::entities::ast::Entities;
 
 public Entities merge(loc files...) {
 	return merge({ parse(f) | f <- files });

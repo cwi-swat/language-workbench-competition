@@ -1,4 +1,4 @@
-module languages::database::ast::Database
+module lang::database::ast::Database
 
 data Database 
 	= database(list[Table] tables);

@@ -1,9 +1,9 @@
-module languages::packages::resolve::Packages
+module lang::packages::resolve::Packages
 
-import languages::packages::ast::Packages;
-import languages::entities::ast::Entities;
-import languages::packages::check::Packages;
-import languages::packages::utils::Load;
+import lang::packages::ast::Packages;
+import lang::entities::ast::Entities;
+import lang::packages::check::Packages;
+import lang::packages::utils::Load;
 
 import IO;
 

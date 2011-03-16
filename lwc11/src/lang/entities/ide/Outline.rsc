@@ -1,6 +1,6 @@
-module languages::entities::ide::Outline
+module lang::entities::ide::Outline
 
-import languages::entities::syntax::Entities;
+import lang::entities::syntax::Entities;
 
 import ParseTree; // for loc annos
 

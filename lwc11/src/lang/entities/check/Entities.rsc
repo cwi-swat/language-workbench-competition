@@ -1,6 +1,6 @@
-module languages::entities::check::Entities
+module lang::entities::check::Entities
 
-import languages::entities::ast::Entities;
+import lang::entities::ast::Entities;
 import Message;
 import Relation;
 

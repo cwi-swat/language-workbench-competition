@@ -1,8 +1,8 @@
-module languages::entities::syntax::Entities
+module lang::entities::syntax::Entities
 
-import languages::entities::syntax::Layout;
-import languages::entities::syntax::Ident;
-import languages::entities::syntax::Types;
+import lang::entities::syntax::Layout;
+import lang::entities::syntax::Ident;
+import lang::entities::syntax::Types;
 
 start syntax Entities
 	= entities: Entity* entities;

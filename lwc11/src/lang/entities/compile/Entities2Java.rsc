@@ -1,15 +1,14 @@
-module languages::entities::compile::Entities2Java
+module lang::entities::compile::Entities2Java
 
-import languages::entities::ast::Entities;
+import lang::entities::ast::Entities;
 import String;
 
 public list[str] entities2java(Entities es) {
 	return for (e <- es.entities) {
-		append "
-public class <e.name.name> {
-<for (f <- e.fields) {>
-<field2java(f)>
-<}>
+		append "public class <e.name.name> {
+               '<for (f <- e.fields) {>
+               '  <field2java(f)>
+               '<}>
 }
 ";
 	}	
@@ -21,15 +20,13 @@ public str capitalize(str s) {
 
 public str field2java(field(typ, n)) {
 	<t, cn> = <type2java(typ), capitalize(n)>;
-	return "
-private <t> <n>;
-public <t> get<cn>() {
-	return this.<n>;
-}
-public void set<cn>(<t> <n>) {
-	this.<n> = <n>;
-}
-";
+	return "private <t> <n>;
+		   'public <t> get<cn>() {
+	       '    return this.<n>;
+           '}
+           'public void set<cn>(<t> <n>) {
+	       '    this.<n> = <n>;
+           '}";
 }
 
 public str type2java(primitive(string())) = 	"java.lang.String";

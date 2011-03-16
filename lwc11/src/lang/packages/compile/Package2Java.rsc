@@ -1,21 +1,17 @@
-module languages::packages::compile::Package2Java
+module lang::packages::compile::Package2Java
 
-import languages::packages::ast::Packages;
-import languages::entities::ast::Entities;
-import languages::entities::compile::Entities2Java;
+import lang::packages::ast::Packages;
+import lang::entities::ast::Entities;
+import lang::entities::compile::Entities2Java;
 
 import List;	
 
 public str package2java(Package pkg) {
-	return "
-package <pkg.name>;
-
-<for (i <- pkg.imports) {>
-import <i.name>.*;
-<}>
-
-<intercalate("\n", entities2java(pkg.entities))>	
-";
+	return "package <pkg.name>;
+           '<for (i <- pkg.imports) {>
+           'import <i.name>.*;
+           '<}>
+           '<intercalate("\n", entities2java(pkg.entities))>";
 }
 
 

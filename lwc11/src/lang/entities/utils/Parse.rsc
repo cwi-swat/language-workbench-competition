@@ -1,17 +1,17 @@
-module languages::entities::utils::Parse
+module lang::entities::utils::Parse
 
-import languages::entities::syntax::Entities;
-import languages::entities::syntax::Types;
-import languages::entities::syntax::Ident;
-import languages::entities::syntax::Layout;
+import lang::entities::syntax::Entities;
+import lang::entities::syntax::Types;
+import lang::entities::syntax::Ident;
+import lang::entities::syntax::Layout;
 
-import languages::entities::ast::Entities;
+import lang::entities::ast::Entities;
 import ParseTree;
 
-public languages::entities::ast::Entities::Entities parse(loc file) {
-	return implode(#languages::entities::ast::Entities::Entities, parseTree(file));
+public lang::entities::ast::Entities::Entities parse(loc file) {
+	return implode(#lang::entities::ast::Entities::Entities, parseTree(file));
 }
 
-public languages::entities::syntax::Entities::Entities parseTree(loc file) {
-	return parse(#languages::entities::syntax::Entities::Entities, file);
+public lang::entities::syntax::Entities::Entities parseTree(loc file) {
+	return parse(#lang::entities::syntax::Entities::Entities, file);
 }

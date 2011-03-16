@@ -1,9 +1,9 @@
-module languages::packages::syntax::Packages
+module lang::packages::syntax::Packages
 
-import languages::entities::syntax::Entities;
-import languages::entities::syntax::Layout;
-import languages::entities::syntax::Types;
-import languages::entities::syntax::Ident;
+import lang::entities::syntax::Entities;
+import lang::entities::syntax::Layout;
+import lang::entities::syntax::Types;
+import lang::entities::syntax::Ident;
 
 start syntax Package
 	= package: "package" Ident name "{" Import* imports Entities entities "}";

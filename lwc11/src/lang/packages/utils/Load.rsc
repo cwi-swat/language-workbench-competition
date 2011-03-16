@@ -1,7 +1,7 @@
-module languages::packages::utils::Load
+module lang::packages::utils::Load
 
-import languages::packages::utils::Parse;
-import languages::packages::ast::Packages;
+import lang::packages::utils::Parse;
+import lang::packages::ast::Packages;
 
 import IO;
 

@@ -1,8 +1,8 @@
-module languages::entities::ide::Check
+module lang::entities::ide::Check
 
-import languages::entities::ast::Entities;
-import languages::entities::syntax::Entities;
-import languages::entities::check::Entities;
+import lang::entities::ast::Entities;
+import lang::entities::syntax::Entities;
+import lang::entities::check::Entities;
 import List;
 
 import ParseTree;

@@ -1,7 +1,7 @@
-module languages::instances::syntax::Instances
+module lang::instances::syntax::Instances
 
-import languages::entities::syntax::Ident;
-import languages::entities::syntax::Layout;
+import lang::entities::syntax::Ident;
+import lang::entities::syntax::Layout;
 
 start syntax Instances
 	= instances: Require* requires Instance* instances

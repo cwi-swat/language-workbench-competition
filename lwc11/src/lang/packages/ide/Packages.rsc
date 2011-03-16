@@ -1,14 +1,14 @@
-module languages::packages::ide::Packages
+module lang::packages::ide::Packages
 
 import SourceEditor;
-import languages::packages::syntax::Packages;
-import languages::entities::syntax::Entities;
-import languages::entities::syntax::Layout;
-import languages::entities::syntax::Ident;
-import languages::entities::syntax::Types;
+import lang::packages::syntax::Packages;
+import lang::entities::syntax::Entities;
+import lang::entities::syntax::Layout;
+import lang::entities::syntax::Ident;
+import lang::entities::syntax::Types;
 
-import languages::packages::ast::Packages;
-import languages::packages::ide::Outline;
+import lang::packages::ast::Packages;
+import lang::packages::ide::Outline;
 
 import ParseTree;
 
@@ -16,7 +16,7 @@ public str PACKAGE_EXTENSION = "package";
 
 public void registerPackages() {
  	registerLanguage("Packages", PACKAGE_EXTENSION, Tree (str x, loc l) {
-    	return parse(#languages::packages::syntax::Packages::Package, x, l);
+    	return parse(#lang::packages::syntax::Packages::Package, x, l);
   	});
   	registerOutliner("Packages", outlinePackage);
 }

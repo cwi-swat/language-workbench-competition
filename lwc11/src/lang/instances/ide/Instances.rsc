@@ -1,16 +1,16 @@
-module languages::instances::ide::Instances
+module lang::instances::ide::Instances
 
 
-import languages::instances::syntax::Instances;
-import languages::entities::syntax::Layout;
-import languages::entities::syntax::Ident;
+import lang::instances::syntax::Instances;
+import lang::entities::syntax::Layout;
+import lang::entities::syntax::Ident;
 
-import languages::instances::check::Instances;
-import languages::instances::ast::Instances;
-import languages::entities::ast::Entities;
+import lang::instances::check::Instances;
+import lang::instances::ast::Instances;
+import lang::entities::ast::Entities;
 
-import languages::instances::ide::Outline;
-import languages::instances::ide::Links;
+import lang::instances::ide::Outline;
+import lang::instances::ide::Links;
 
 
 import List;
@@ -21,15 +21,15 @@ import SourceEditor;
 
 public void registerInstances() {
   registerLanguage("Instances", "instances", Tree (str x, loc l) {
-    	return parse(#languages::instances::syntax::Instances::Instances, x, l);
+    	return parse(#lang::instances::syntax::Instances::Instances, x, l);
   });
   registerOutliner("Instances", outlineInstances);
   registerAnnotator("Instances", annotateWithLinks);
 
 /*  
-  registerAnnotator("Instances", languages::instances::syntax::Instances::Instances (languages::instances::syntax::Instances::Instances input) {
+  registerAnnotator("Instances", lang::instances::syntax::Instances::Instances (lang::instances::syntax::Instances::Instances input) {
   		Tree pt = input;
-  		ast = implode(#languages::instances::ast::Instances::Instances, pt);
+  		ast = implode(#lang::instances::ast::Instances::Instances, pt);
   		errors = check(ast, entities([]));
   		pt@messages = toSet(errors);
   		return pt;

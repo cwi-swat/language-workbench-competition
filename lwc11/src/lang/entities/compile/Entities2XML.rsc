@@ -1,6 +1,6 @@
-module languages::entities::compile::Entities2XML
+module lang::entities::compile::Entities2XML
 
-import languages::entities::ast::Entities;
+import lang::entities::ast::Entities;
 
 import XMLDOM;
 import Node;

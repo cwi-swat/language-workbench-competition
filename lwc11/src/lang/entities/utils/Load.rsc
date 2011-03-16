@@ -1,8 +1,8 @@
-module languages::entities::utils::Load
+module lang::entities::utils::Load
 
-import languages::entities::ast::Entities;
-import languages::entities::utils::Parse;
-import languages::entities::ide::Entities;
+import lang::entities::ast::Entities;
+import lang::entities::utils::Parse;
+import lang::entities::ide::Entities;
 
 public Entities load(loc path, str name) {
 	return parse(entitiesPath(path, name));

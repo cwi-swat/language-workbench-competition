@@ -1,23 +1,20 @@
-module languages::database::compile::Database2SQL
+module lang::database::compile::Database2SQL
 
-import languages::database::ast::Database;
+import lang::database::ast::Database;
 import List;
 
 public str database2sql(Database db) {
-	return "
-<for (t <- db.tables) {>
-<table2sql(t)>
-<}>
+	return "<for (t <- db.tables) {>
+           '<table2sql(t)>
+           '<}>
 ";
 }
 
 public str table2sql(Table t) {
 	cols = [ column2sql(c) | c <- t.columns ];
-	return "
-create table <t.name> (
-<intercalate(",\n", cols)>
-)	
-";
+	return "create table <t.name> (
+           '  <intercalate(",\n", cols)>
+           ')";
 }
 
 public str column2sql(Column c) {

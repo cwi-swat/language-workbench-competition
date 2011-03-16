@@ -1,14 +1,14 @@
-module languages::instances::utils::Parse
+module lang::instances::utils::Parse
 
-import languages::instances::syntax::Instances;
-import languages::entities::syntax::Ident;
-import languages::entities::syntax::Types;
-import languages::entities::syntax::Layout;
+import lang::instances::syntax::Instances;
+import lang::entities::syntax::Ident;
+import lang::entities::syntax::Types;
+import lang::entities::syntax::Layout;
 
-import languages::instances::ast::Instances;
+import lang::instances::ast::Instances;
 import ParseTree;
 
-public languages::instances::ast::Instances::Instances parse(loc file) {
-	pt = parse(#languages::instances::syntax::Instances::Instances, file);
-	return implode(#languages::instances::ast::Instances::Instances, pt);
+public lang::instances::ast::Instances::Instances parse(loc file) {
+	pt = parse(#lang::instances::syntax::Instances::Instances, file);
+	return implode(#lang::instances::ast::Instances::Instances, pt);
 }

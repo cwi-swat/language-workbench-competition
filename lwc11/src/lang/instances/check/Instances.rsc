@@ -1,10 +1,10 @@
-module languages::instances::check::Instances
+module lang::instances::check::Instances
 
-import languages::entities::ast::Entities;
-import languages::entities::check::Entities; // for nameStr
-import languages::entities::utils::Merge;
-import languages::entities::utils::Load;
-import languages::instances::ast::Instances;
+import lang::entities::ast::Entities;
+import lang::entities::check::Entities; // for nameStr
+import lang::entities::utils::Merge;
+import lang::entities::utils::Load;
+import lang::instances::ast::Instances;
 
 import Node;
 import Map;

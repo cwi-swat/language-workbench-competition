@@ -1,15 +1,15 @@
-module languages::packages::utils::Parse
+module lang::packages::utils::Parse
 
-import languages::packages::ast::Packages;
-import languages::packages::syntax::Packages;
-import languages::entities::syntax::Entities;
-import languages::entities::syntax::Layout;
-import languages::entities::syntax::Ident;
-import languages::entities::syntax::Types;
+import lang::packages::ast::Packages;
+import lang::packages::syntax::Packages;
+import lang::entities::syntax::Entities;
+import lang::entities::syntax::Layout;
+import lang::entities::syntax::Ident;
+import lang::entities::syntax::Types;
 
 import ParseTree;
 
-public languages::packages::ast::Packages::Package parse(loc file) {
-	return implode(#languages::packages::ast::Packages::Package,
-			parse(#languages::packages::syntax::Packages::Package, file));
+public lang::packages::ast::Packages::Package parse(loc file) {
+	return implode(#lang::packages::ast::Packages::Package,
+			parse(#lang::packages::syntax::Packages::Package, file));
 }

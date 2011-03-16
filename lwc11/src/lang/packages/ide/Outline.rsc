@@ -1,7 +1,7 @@
-module languages::packages::ide::Outline
+module lang::packages::ide::Outline
 
-import languages::entities::ide::Outline;
-import languages::packages::syntax::Packages;
+import lang::entities::ide::Outline;
+import lang::packages::syntax::Packages;
 
 import ParseTree; // for loc annos
 
