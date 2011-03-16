@@ -2,10 +2,9 @@ entity Person {
 	string name
 	string firstName
 	date birthDate
-	date birthDate
 	Car2 ownedCar
 }
 
-entity Person {
+entity Person2 {
 	date birt
 }

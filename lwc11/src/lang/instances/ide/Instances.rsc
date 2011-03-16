@@ -1,39 +1,28 @@
 module lang::instances::ide::Instances
 
-
-import lang::instances::syntax::Instances;
-import lang::entities::syntax::Layout;
-import lang::entities::syntax::Ident;
-
 import lang::instances::check::Instances;
-import lang::instances::ast::Instances;
-import lang::entities::ast::Entities;
+import lang::instances::syntax::Instances;
 
 import lang::instances::ide::Outline;
 import lang::instances::ide::Links;
-
+import lang::instances::utils::Parse;
+import lang::instances::utils::Implode;
 
 import List;
 import ParseTree;
 import SourceEditor;
 
+public str INSTANCES_LANGUAGE = "Instances";
+public str INSTANCES_EXTENSION = "instances";
 
 
 public void registerInstances() {
-  registerLanguage("Instances", "instances", Tree (str x, loc l) {
-    	return parse(#lang::instances::syntax::Instances::Instances, x, l);
-  });
-  registerOutliner("Instances", outlineInstances);
-  registerAnnotator("Instances", annotateWithLinks);
+	registerLanguage(INSTANCES_LANGUAGE, "instances", parseInstances);
+  	registerOutliner(INSTANCES_LANGUAGE, outlineInstances);
+  	registerAnnotator(INSTANCES_LANGUAGE, annotateWithLinks);
+  	registerAnnotator(INSTANCES_LANGUAGE, checkAndAnnotatePT);
+}
 
-/*  
-  registerAnnotator("Instances", lang::instances::syntax::Instances::Instances (lang::instances::syntax::Instances::Instances input) {
-  		Tree pt = input;
-  		ast = implode(#lang::instances::ast::Instances::Instances, pt);
-  		errors = check(ast, entities([]));
-  		pt@messages = toSet(errors);
-  		return pt;
-	}
-  );
-*/
+private Instances checkAndAnnotatePT(Instances pt) {
+  	return pt[@messages = toSet(check(|project://lwc11/input|,implode(pt)))];
 }

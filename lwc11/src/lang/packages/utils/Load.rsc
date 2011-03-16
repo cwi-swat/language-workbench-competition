@@ -8,38 +8,35 @@ import IO;
 public str EXT = "package";
 
 data LoadResult
-	= notFound(set[Package] offenders)
+	= notFound()
 	| success(loc file, Package package);
 
-alias WorkingSet = map[str pkgName, LoadResult result];
-
-// a map from packagename to the set of packages that import it.
-alias Todo = map[str, set[Package]];
+alias WorkingSet = rel[str pkgName, LoadResult result];
 
 public WorkingSet loadAll(loc path, Package pkg) {
-	return (pkg.name: success(pkg@location, pkg)) + loadPackages(path, (r: pkg | r <- requiredPackages(pkg)));
+	return {<pkg.name, success(pkg@location, pkg)>,
+			loadPackages(path, {r | r <- requiredPackages(pkg)})};
 }
 
 public WorkingSet load(loc path, str name) {
-	return loadPackages(path, (name: {}));	
+	return loadPackages(path, {name});	
 }
 
-public WorkingSet loadPackages(loc path, Todo todo) {
-	ws = ();	
-	set[Package] empty = {};
-	while (p <- todo, p notin ws) {
-		ppath = packagePath(path, p);
-		if (exists(ppath)) {
-			pkg = parse(ppath);
-			ws[p] = success(ppath, pkg);
-			for (r <- requiredPackages(pkg)) {
-				todo[r]?empty += {pkg};
-			}
+public WorkingSet loadPackages(loc searchPath, Todo todo) {
+	ws = {};	
+	while (todo != {}) {
+		<p, todo> = takeOneFrom(todo);
+		path = packagePath(searchPath, p);
+		try {
+			pkg = parse(path);
+			lr = success(path, pkg);
+			todo += reguiredPackages(pkg) - domain(ws);
 		}
-		else {
-			ws[p] = notFound(todo[p]);
-		}		
-		todo -= (p: {});
+		catch PathNotFound(_): {
+			lr = notFound(path);
+		}
+		ws += {<p, lr>};		
+		todo -= {p};
 	}
 	return ws;
 }

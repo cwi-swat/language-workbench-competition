@@ -2,10 +2,11 @@ module lang::entities::utils::Load
 
 import lang::entities::ast::Entities;
 import lang::entities::utils::Parse;
+import lang::entities::utils::Implode;
 import lang::entities::ide::Entities;
 
 public Entities load(loc path, str name) {
-	return parse(entitiesPath(path, name));
+	return implode(parseEntities(entitiesPath(path, name)));
 }
 
 // TODO: factor out generic function
