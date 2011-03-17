@@ -8,7 +8,7 @@ public list[Message] check(Entities es) {
 	defs = {};
 	errors = for (e <- es.entities) {
 		if (e.name in defs) {
-			append error("Redeclaration of entity <nameStr(e.name)>", e@location);
+			append error("Redeclaration of entity <nameStr(e.name)>", e.name@location);
 		}
 		defs += {e.name};
 	}
