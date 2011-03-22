@@ -8,7 +8,7 @@ import lang::entities::utils::Implode;
 import lang::entities::compile::Entities2Java;
 import lang::entities::compile::Entities2XML;
 
-import SourceEditor;
+import util::IDE;
 import List;
 import XMLDOM;
 import IO;

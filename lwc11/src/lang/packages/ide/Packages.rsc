@@ -1,6 +1,6 @@
 module lang::packages::ide::Packages
 
-import SourceEditor;
+import util::IDE;
 import lang::packages::syntax::Packages;
 import lang::entities::syntax::Entities;
 import lang::entities::syntax::Layout;

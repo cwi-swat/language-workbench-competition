@@ -10,7 +10,7 @@ import lang::instances::utils::Implode;
 
 import List;
 import ParseTree;
-import SourceEditor;
+import util::IDE;
 
 public str INSTANCES_LANGUAGE = "Instances";
 public str INSTANCES_EXTENSION = "instances";
