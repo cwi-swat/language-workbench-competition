@@ -13,8 +13,16 @@ import Map;
 
 public str nameStr(qualified(str pkg, str n)) = n;
 
+public list[Message] check(loc path, Package pkg) {
+	return resolveAndCheck(loadAll(path, pkg));
+}
+
 public list[Message] check(loc path, str name) {
 	WorkingSet ws = load(path, name);
+	return resolveAndCheck(ws);
+}
+
+public list[Message] resolveAndCheck(WorkingSet ws) {
 	errors = check(ws);
 	ws = resolve(ws);
 	es = [ e | /success(_, pkg) := ws, /Entity e := pkg ];
@@ -34,7 +42,7 @@ public list[Message] check(WorkingSet pkgs) {
 				  
 	// TODO: check that package name corresponds to filename
 				
-	return ( errors | it + checkImports(pkg, pkgs) | n <- pkgs, success(_, pkg) := pkgs[n]);
+	return ( errors | it + checkImports(pkg, pkgs) | <n, success(_, pkg)> <- pkgs);
 }
 
 public list[Message] checkImports(Package pkg, WorkingSet pkgs) {

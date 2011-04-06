@@ -1,9 +1,11 @@
 module lang::packages::utils::Load
 
-import lang::packages::utils::Parse;
 import lang::packages::ast::Packages;
+import lang::packages::utils::Parse;
+import lang::packages::utils::Implode;
 
 import IO;
+import Set;
 
 public str EXT = "package";
 
@@ -22,13 +24,14 @@ public WorkingSet load(loc path, str name) {
 	return loadPackages(path, {name});	
 }
 
-public WorkingSet loadPackages(loc searchPath, Todo todo) {
+public WorkingSet loadPackages(loc searchPath, set[str] todo) {
 	ws = {};	
 	while (todo != {}) {
 		<p, todo> = takeOneFrom(todo);
 		path = packagePath(searchPath, p);
+		LoadResult lr;
 		try {
-			pkg = parse(path);
+			pkg = implode(parsePackage(path));
 			lr = success(path, pkg);
 			todo += requiredPackages(pkg) - ws<0>;
 		}

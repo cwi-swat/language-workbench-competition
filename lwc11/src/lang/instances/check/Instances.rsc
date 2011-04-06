@@ -38,7 +38,7 @@ public list[Message] checkInstance(Instance i, map[Name, Name] idefs, Entity e) 
 					| a <- i.assigns, a.name notin fdefs ];
 	
 	errors += [ error("Undefined instance", a@location)
-					| a <- i.assigns,  Value::reference(Name n) := a.\value, n notin idefs ];
+					| a <- i.assigns,  Value::reference(Name n) := a.exp, n notin idefs ];
 				
 	errors += [ error("Missing field <n>", i@location) 
 					| n <- domain(fdefs) - { a.name | a <- i.assigns } ];

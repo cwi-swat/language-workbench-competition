@@ -1,6 +1,7 @@
 package car {
-    import person2
+    import person
 	entity car.ca {
+		string make
 		string make
 		string model
 	}

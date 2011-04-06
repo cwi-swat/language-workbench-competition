@@ -9,6 +9,3 @@ entity Car {
    string make
    string model
 }
-
-
-

@@ -8,8 +8,8 @@ import lang::entities::syntax::Entities;
 import lang::instances::syntax::Values;
 
 syntax Field 
-	= derived: Type Ident "=" Expression
-	| annotated: Annotation Type Ident 
+	= derived: Type Ident name  "=" Expression
+	| annotated: Annotation Type Ident name 
 	;
 	
 syntax Annotation

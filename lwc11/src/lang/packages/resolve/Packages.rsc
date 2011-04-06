@@ -19,14 +19,14 @@ import IO;
 	
 
 public WorkingSet resolve(WorkingSet pkgs) {
-	return { <k, resolvePkg(pkg, pkgs)> | <k, success(l, pkg)> <- pkgs };
+	return { <k, success(l, resolvePkg(pkg, pkgs))> | <k, success(l, pkg)> <- pkgs };
 }
 
 private Package resolvePkg(Package pkg, WorkingSet pkgs) {
 	imps = imports(pkg) + {pkg.name};
 	return visit (pkg) {
 		case Name n:name(str x) => qualified(ip.name, x)[@location=n@location]
-		     when i <- imps, <i, success(_, ip)> <- pkgs, x in exports(ip)
+		     when i <- imps, <i, success(_, Package ip)> <- pkgs, x in exports(ip)
 	}
 }
 
