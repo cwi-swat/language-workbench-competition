@@ -9,6 +9,7 @@ import lang::packages::utils::Parse;
 
 import ParseTree;
 import List;
+import Message;
 
 public str PACKAGE_EXTENSION = "package";
 
@@ -18,6 +19,6 @@ public void registerPackages() {
   	registerAnnotator("Packages", checkAndAnnotatePT); 
 }
 
-private Package checkAndAnnotatePT(Package pt) {
-  	return pt[@messages = toSet(check(|project://lwc11/input|,implode(pt)))];
+public Package checkAndAnnotatePT(Package pt) {
+  	return pt[@messages = { m | m <- check(|project://lwc11/input|,implode(pt)), m.at.path == (pt@\loc).path }];
 }

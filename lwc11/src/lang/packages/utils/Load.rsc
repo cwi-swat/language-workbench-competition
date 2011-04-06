@@ -35,8 +35,11 @@ public WorkingSet loadPackages(loc searchPath, set[str] todo) {
 			lr = success(path, pkg);
 			todo += requiredPackages(pkg) - ws<0>;
 		}
+		catch IO(_): {
+			lr = notFound();
+		}
 		catch PathNotFound(_): {
-			lr = notFound(path);
+			lr = notFound();
 		}
 		ws += {<p, lr>};		
 		todo -= {p};

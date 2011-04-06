@@ -35,9 +35,7 @@ public list[Message] check(WorkingSet pkgs) {
 	// can assume that all imported packagenames of all packages
 	// are in the domain of pkgs. (this follows from Load)
 	
-	errors = [ error("Could not find package <n>", p@location) | <n, notFound()> <- pkgs ];
-				
-	errors += [ error("Declaration of qualified name <p2>.<n2> that does not correspond to package name <n>", q@location) 
+	errors = [ error("Qualified name does not correspond to package name", q@location) 
 				| <p1, success(_, pkg)> <- pkgs,  /entity(q:qualified(p2, n2), _) <- pkg, p2 != p1 ];  
 				  
 	// TODO: check that package name corresponds to filename
@@ -48,14 +46,17 @@ public list[Message] check(WorkingSet pkgs) {
 public list[Message] checkImports(Package pkg, WorkingSet pkgs) {
 	names = { <n, pkg.name> | n <- exports(pkg) };
 	list[Message] errors = [];
-	for (i <- imports(pkg), <i, success(_, pkg2)> <- pkgs) {
+	for (/imp(i) <- pkg, <i, success(_, pkg2)> <- pkgs) {
 		pkg2names = exports(pkg2);
 		for (n <- domain(names)) {
 			overlap = domain(names) & pkg2names; 
-			errors += [ error("Name collision in <pkg.name>: <ov> exported from both <pkg2.name> and <p3>", pkg@location) 
+			errors += [ error("Name collision: <ov> exported from both <pkg2.name> and <p3>", pkg@location) 
 							| ov <- overlap, <n, p3> <- names ];
 		}
 		names += { <n, pkg2.name> | n <- pkg2names };
+	}
+	for (/i:imp(n) <- pkg, <n, notFound()> <- pkgs) {
+		errors += [ error("Unresolved import", i@location)]; 
 	}
 	return errors;
 }
