@@ -5,12 +5,16 @@ import List;
 import lang::packages::ast::Packages;
 extend lang::entities::compile::Entities2Java;
 
-public str package2java(Package pkg) {
+public rel[str, str] package2java(Package pkg) {
+	return { <"<pkg.name>.<e.name.name>", packagedEntity2Java(pkg, e)> | e <- pkg.entities.entities };
+}
+
+public str packagedEntity2Java(Package pkg, Entity e) {
 	return "package <pkg.name>;
            '<for (i <- pkg.imports) {>
            'import <i.name>.*;
            '<}>
-           '<intercalate("\n", entities2java(pkg.entities))>";
+           '<entity2java(e)>";
 }
 
-public str type2java(qualified(str pkg, str name)) = "<pkg>.<name>";
+public str type2java(reference(qualified(str pkg, str name))) = "<pkg>.<name>";
