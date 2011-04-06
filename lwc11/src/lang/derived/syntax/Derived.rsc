@@ -13,7 +13,7 @@ syntax Field
 	;
 	
 syntax Annotation
-	= host: "@host" "(" Str arg ")"
+	= @category="MetaVariable" host: "@host" "(" Str arg ")"
 	; 
 	
 syntax Expression
