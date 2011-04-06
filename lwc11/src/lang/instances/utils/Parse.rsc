@@ -1,6 +1,7 @@
 module lang::instances::utils::Parse
 
 import lang::instances::syntax::Instances;
+import lang::instances::syntax::Values;
 import lang::entities::syntax::Ident;
 import lang::entities::syntax::Types;
 import lang::entities::syntax::Layout;

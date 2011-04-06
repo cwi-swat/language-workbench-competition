@@ -2,10 +2,12 @@ entity Car2 {
 /* a car */
 	string make
 
-	string model
+	string org
 	Car2 bla	
 }
 
 entity Car3 {
     string make
+    string model
+    currency price
 }

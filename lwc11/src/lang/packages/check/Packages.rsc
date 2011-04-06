@@ -1,8 +1,8 @@
 module lang::packages::check::Packages
 
 import lang::packages::ast::Packages;
-import lang::entities::ast::Entities;
-import lang::entities::check::Entities;
+extend lang::entities::check::Entities;
+
 import lang::packages::utils::Load;
 import lang::packages::resolve::Packages;
 
@@ -11,8 +11,6 @@ import Relation;
 import IO;
 import Map;
 
-// TODO: need extend!
-
 public str nameStr(qualified(str pkg, str n)) = n;
 
 public list[Message] check(loc path, str name) {
@@ -20,7 +18,6 @@ public list[Message] check(loc path, str name) {
 	errors = check(ws);
 	ws = resolve(ws);
 	es = [ e | /success(_, pkg) := ws, /Entity e := pkg ];
-	for (x <- es) println(es);
 	ent = entities(es);
 	return errors + check(ent);
 }
@@ -30,12 +27,10 @@ public list[Message] check(WorkingSet pkgs) {
 	// can assume that all imported packagenames of all packages
 	// are in the domain of pkgs. (this follows from Load)
 	
-	errors = [ error("Could not find package <n> imported by <p.name>", p@location) 
-				| n <- pkgs, notFound(off) := pkgs[n], p <- off ];
+	errors = [ error("Could not find package <n>", p@location) | <n, notFound()> <- pkgs ];
 				
 	errors += [ error("Declaration of qualified name <p2>.<n2> that does not correspond to package name <n>", q@location) 
-				| n <- pkgs, success(_, pkg) := pkgs[n],  
-				  /entity(q:qualified(p2, n2), _) <- pkg, p2 != n ];  
+				| <p1, success(_, pkg)> <- pkgs,  /entity(q:qualified(p2, n2), _) <- pkg, p2 != p1 ];  
 				  
 	// TODO: check that package name corresponds to filename
 				
@@ -45,12 +40,12 @@ public list[Message] check(WorkingSet pkgs) {
 public list[Message] checkImports(Package pkg, WorkingSet pkgs) {
 	names = { <n, pkg.name> | n <- exports(pkg) };
 	list[Message] errors = [];
-	for (i <- imports(pkg), success(_, pkg2) := pkgs[i]) {
+	for (i <- imports(pkg), <i, success(_, pkg2)> <- pkgs) {
 		pkg2names = exports(pkg2);
 		for (n <- domain(names)) {
 			overlap = domain(names) & pkg2names; 
 			errors += [ error("Name collision in <pkg.name>: <ov> exported from both <pkg2.name> and <p3>", pkg@location) 
-							| ov <- overlap, p3 <- names[n] ];
+							| ov <- overlap, <n, p3> <- names ];
 		}
 		names += { <n, pkg2.name> | n <- pkg2names };
 	}

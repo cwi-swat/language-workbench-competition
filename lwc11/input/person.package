@@ -2,6 +2,7 @@ package person {
 	import car
 	entity Person {
 		string name
+		string name
 		string firstName
 		date birthDate
 		date birthDate

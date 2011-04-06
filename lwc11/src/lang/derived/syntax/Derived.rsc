@@ -1,9 +1,11 @@
-module languages::derived::syntax::Derived
+module lang::derived::syntax::Derived
 
-import languages::entities::syntax::Layout;
-import languages::entities::syntax::Ident;
-import languages::entities::syntax::Types;
-import languages::entities::syntax::Entities;
+import lang::entities::syntax::Layout;
+import lang::entities::syntax::Ident;
+import lang::entities::syntax::Types;
+import lang::entities::syntax::Entities;
+
+import lang::instances::syntax::Values;
 
 syntax Field 
 	= derived: Type Ident "=" Expression
@@ -11,11 +13,11 @@ syntax Field
 	;
 	
 syntax Annotation
-	= annotation: "@" Ident "(" String ")"
+	= host: "@host" "(" Str arg ")"
 	; 
 	
 syntax Expression
-	= nat: Natural value
+	= const: Value value
 	| field: Ident var
 	| bracket Bracket: "(" Expression exp ")"
 	| neg: "-" Expression arg
@@ -30,16 +32,3 @@ syntax Expression
 		| sub: Expression lhs "-" Expression rhs
 	);
 	
-syntax String
-	= lex [\"] StrChar* [\"]
-	;
-
-syntax StrChar
-	= lex ![\\\"]
-	| [\\][\"]
-	;
-	
-syntax Natural
-	= lex [0-9]+
-	# [0-9]
-	;

@@ -1,6 +1,7 @@
 module lang::derived::ast::Derived
 
-import lang::entities::ast::Entities;
+extend lang::entities::ast::Entities;
+extend lang::instances::ast::Values;
 
 data Field
 	= derived(Type \type, str name, Expression exp)
@@ -8,11 +9,11 @@ data Field
 	;
 	
 data Annotation
-	= annotation(str name, str string)
+	= host(str string)
 	;
 
 data Expression
-	= nat(int intValue)
+	= const(Value val)
 	| field(str name)
 	| neg(Expression arg)
 	| mul(Expression lhs, Expression rhs)

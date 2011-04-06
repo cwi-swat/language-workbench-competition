@@ -14,7 +14,7 @@ public str table2sql(Table t) {
 	cols = [ column2sql(c) | c <- t.columns ];
 	return "create table <t.name> (
            '  <intercalate(",\n", cols)>
-           ')";
+           ');";
 }
 
 public str column2sql(Column c) {

@@ -30,7 +30,7 @@ public WorkingSet loadPackages(loc searchPath, Todo todo) {
 		try {
 			pkg = parse(path);
 			lr = success(path, pkg);
-			todo += reguiredPackages(pkg) - domain(ws);
+			todo += requiredPackages(pkg) - ws<0>;
 		}
 		catch PathNotFound(_): {
 			lr = notFound(path);

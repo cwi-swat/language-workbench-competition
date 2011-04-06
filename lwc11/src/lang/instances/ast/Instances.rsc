@@ -1,6 +1,7 @@
 module lang::instances::ast::Instances
 
 import lang::entities::ast::Entities; // for Name
+extend lang::instances::ast::Values;
 
 data Instances
 	= instances(list[Require] requires, list[Instance] instances);
@@ -12,16 +13,14 @@ data Instance
 	= instance(Name \type, Name name, list[Assign] assigns);
 	
 data Assign
-	= assign(str name, Value \value);
+	= assign(str name, Expression exp);
 
-data Value
-	= date(int day, int month, int year)
-	| string(str strValue)
-	| integer(int intValue)
-	| boolean(bool boolValue)
+data Expression
+	= const(Value val)
 	| reference(Name name);
+
 
 anno loc Instances@location;
 anno loc Instance@location;
 anno loc Assign@location;
-anno loc Value@location;
+anno loc Expression@location;

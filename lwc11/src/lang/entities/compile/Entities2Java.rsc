@@ -15,11 +15,8 @@ public str entity2java(Entity e) {
 		   '}";
 }
 
-public str capitalize(str s) {
-  return toUpperCase(substring(s, 0, 1)) + substring(s, 1);
-}
 
-public str field2java(field(typ, n)) {
+public str field2java(Field::field(typ, n)) {
 	<t, cn> = <type2java(typ), capitalize(n)>;
 	return "private <t> <n>;
 		   'public <t> get<cn>() {
@@ -31,9 +28,13 @@ public str field2java(field(typ, n)) {
 }
 
 public str type2java(primitive(string())) = 	"java.lang.String";
-public str type2java(primitive(date())) = 		"java.util.Date";
 public str type2java(primitive(integer())) = 	"java.lang.Integer";
 public str type2java(primitive(boolean())) = 	"java.lang.Boolean";
+public str type2java(primitive(date())) = 		"java.util.Date";
+public str type2java(primitive(currency())) = 	"java.util.Currency";
 public str type2java(reference(name(str n))) = 	n;
 
 
+public str capitalize(str s) {
+  return toUpperCase(substring(s, 0, 1)) + substring(s, 1);
+}

@@ -8,12 +8,12 @@ public class Car2 {
       this.make = make;
   }
 
-  private java.lang.String model;
-  public java.lang.String getModel() {
-      return this.model;
+  private java.lang.String org;
+  public java.lang.String getOrg() {
+      return this.org;
   }
-  public void setModel(java.lang.String model) {
-      this.model = model;
+  public void setOrg(java.lang.String org) {
+      this.org = org;
   }
 
   private Car2 bla;

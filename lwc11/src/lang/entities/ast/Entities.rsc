@@ -20,7 +20,8 @@ data PrimitiveType
 	= string()
 	| date()
 	| integer()
-	| boolean();
+	| boolean()
+	| currency();
 
 anno loc Entities@location;
 anno loc Entity@location;

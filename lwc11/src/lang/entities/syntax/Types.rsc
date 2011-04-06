@@ -10,10 +10,12 @@ syntax PrimitiveType
 	= string: "string" 
 	| date: "date" 
 	| integer: "integer" 
-	| boolean: "boolean";
+	| boolean: "boolean"
+	| currency: "currency";
 
 syntax Reserved
 	= "string"
 	| "date"
 	| "integer"
-	| "boolean";
+	| "boolean"
+	| "currency";

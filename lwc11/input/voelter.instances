@@ -3,13 +3,10 @@ require car
 
 Person p = {
 	birthDate = 14.02.1927
-
 	ownedCar = c
-	ownedCar = ddddddd
-	
+	name = "bla"
 }
 
 Car2 c = {
-	mak = "VW"
-	model = "Touran"
+	make = "VW"
 }

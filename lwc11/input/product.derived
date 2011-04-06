@@ -1,0 +1,8 @@
+entity Product {
+	string name
+	currency price
+	currency vat = 0.19 * price
+	
+	@host("tax.utils.VAT.computeVAT")
+	currency vat2
+}

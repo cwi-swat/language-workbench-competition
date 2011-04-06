@@ -1,6 +1,6 @@
 module lang::packages::ast::Packages
 
-import lang::entities::ast::Entities;
+extend lang::entities::ast::Entities;
 
 data Package 
 	= package(str name, list[Import] imports, Entities entities);

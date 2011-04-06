@@ -2,16 +2,18 @@ module lang::entities::compile::Entities2XML
 
 import lang::entities::ast::Entities;
 
-import XMLDOM;
 import Node;
+import XMLDOM;
 
 public Node entities2xml(Entities es) {
-	return document(element(none(), "entities", [ entity2element(e) | e <- es.entities ]));
+	return document(element(none(), "entities", 
+	   [ entity2element(e) | e <- es.entities ]));
 }
 
 public Node entity2element(Entity e) {
 	a = attribute(none(), "name", e.name.name);
-	return element(none(), "entity", [a] + [ field2element(f) | f <- e.fields ]); 
+	return element(none(), "entity", 
+	   [a, [ field2element(f) | f <- e.fields ]]); 
 }
 
 public Node field2element(Field f) {

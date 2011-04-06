@@ -7,6 +7,8 @@ import lang::entities::utils::Parse;
 import lang::entities::utils::Implode;
 import lang::entities::compile::Entities2Java;
 import lang::entities::compile::Entities2XML;
+import lang::entities::transform::Entities2Database;
+import lang::database::compile::Database2SQL;
 
 import util::IDE;
 import List;
@@ -24,13 +26,21 @@ public void generateJava(Entities pt, loc l) {
 	}
 }
 
+private str baseName(loc l) {
+	if (/\/<base:[a-zA-Z0-9_]+>\.entities$/ := l.path) {
+		return base;
+	}
+	throw "Could not match basename in <l.path>";
+}
+
 public void generateXML(Entities pt, loc l) {
 	xml = entities2xml(implode(pt));
-	println(l.path);
-	if (/\/<base:[a-zA-Z0-9_]+>\.entities$/ := l.path) {
-		println("outputting to: <base>.xml");
-		writeXMLPretty(|project://lwc11/output/<base>.xml|, xml);
-	}
+	writeXMLPretty(|project://lwc11/output/<baseName(l)>.xml|, xml);
+}
+
+public void generateSQL(Entities pt, loc l) {
+	sql = database2sql(entities2database(implode(pt)));
+	writeFile(|project://lwc11/output/<baseName(l)>.sql|, sql);
 }
 
 
@@ -40,7 +50,8 @@ public void registerEntities() {
 			menu(ENTITIES_LANGUAGE,[
 	//    		edit("Format", formatModule), 
 	    		action("Generate Java", generateJava), 
-	    		action("Generate XML", generateXML) 
+	    		action("Generate XML", generateXML), 
+	    		action("Generate SQL", generateSQL) 
 		    ])
 	  	)
 	};

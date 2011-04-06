@@ -1,7 +1,7 @@
-module languages::entities::transform::Entities2Database
+module lang::entities::transform::Entities2Database
 
-import languages::entities::ast::Entities;
-import languages::database::ast::Database;
+import lang::entities::ast::Entities;
+import lang::database::ast::Database;
 
 private str KEY = "_id";
 
