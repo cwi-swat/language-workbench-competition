@@ -30,6 +30,8 @@ public ColumnType type2columnType(Type t) {
      	case primitive(PrimitiveType::date()): 		return ColumnType::date();
      	case primitive(PrimitiveType::integer()): 	return ColumnType::integer();
      	case primitive(PrimitiveType::boolean()): 	return ColumnType::boolean();
+     	case primitive(PrimitiveType::currency()): 	return ColumnType::boolean();
+     	
      	case reference(_): 							return ColumnType::integer();
      	default: throw "Unhandled type: <t>";	
 	}

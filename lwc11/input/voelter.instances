@@ -2,11 +2,13 @@ require person
 require car
 
 Person p = {
+	name = "Smith"
+	firstName = "John"
 	birthDate = 14.02.1927
 	ownedCar = c
-	name = "bla"
 }
 
-Car2 c = {
+Car c = {
 	make = "VW"
+	model = "Golf"
 }

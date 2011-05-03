@@ -17,7 +17,7 @@ public class Product {
   }
 
   public java.util.Currency getVat() {
-      return (0.19 * this.price);
+      return (0.19 * getPrice());
   }
 
   public java.util.Currency getVat2() {

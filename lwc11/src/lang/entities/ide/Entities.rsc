@@ -17,8 +17,6 @@ import IO;
 import Message;
 import ParseTree;
 
-public str ENTITIES_EXTENSION = "entities";
-public str ENTITIES_LANGUAGE = "Entities";
 
 public void generateJava(Entities pt, loc l) {
 	for (<name, class> <- entities2java(implode(pt))) {
@@ -43,12 +41,14 @@ public void generateSQL(Entities pt, loc l) {
 	writeFile(|project://lwc11/output/<baseName(l)>.sql|, sql);
 }
 
+public str ENTITIES_EXTENSION = "entities";
+public str ENTITIES_LANGUAGE = "Entities";
+
 
 public void registerEntities() {
 	contribs = {
 		popup(
 			menu(ENTITIES_LANGUAGE,[
-	//    		edit("Format", formatModule), 
 	    		action("Generate Java", generateJava), 
 	    		action("Generate XML", generateXML), 
 	    		action("Generate SQL", generateSQL) 

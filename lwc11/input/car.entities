@@ -6,7 +6,7 @@ entity Car2 {
 	Car2 bla	
 }
 
-entity Car3 {
+entity Car4 {
     string make
     string model
     currency price

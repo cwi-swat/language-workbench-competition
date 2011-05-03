@@ -1,10 +1,13 @@
 package person {
 	import car
+	import bla
+	entity Car {
+	
+	}
 	entity Person {
 		string name
 		string name
 		string firstName
-		date birthDate
 		date birthDate
 		integer ownedCar
 		car.Car2 ownedCar

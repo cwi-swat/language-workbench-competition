@@ -5,6 +5,7 @@ entity Person {
 	Car2 ownedCar
 }
 
-entity Person2 {
-	date birt
+entity Car {
+	string make
+	string model
 }
