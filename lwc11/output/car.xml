@@ -2,11 +2,13 @@
 <entities>
   <entity name="Car2">
     <field name="make" type="string" />
-    <field name="model" type="string" />
+    <field name="org" type="string" />
     <field name="bla" type="ref" references="Car2" />
   </entity>
   <entity name="Car3">
     <field name="make" type="string" />
+    <field name="model" type="string" />
+    <field name="price" type="currency" />
   </entity>
 </entities>
 

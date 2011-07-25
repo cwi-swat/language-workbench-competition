@@ -7,21 +7,8 @@ syntax Value
 	| @category="Constant" float: Float
 	;
 	
-syntax Int
-	= lex [0-9]+ 
-	# [0-9]
-	;
+lexical Int = [0-9]+ !>> [0-9];
 
-syntax Float
-	= lex [0-9]+ "." [0-9]+ 
-	# [0-9] 
-	;
+lexical Float = [0-9]+ "." [0-9]+ !>> [0-9];
 
-syntax Str
-	= lex [\"] StrChar* [\"]
-	;
-
-syntax StrChar
-	= lex ![\"]
-	| lex [\\][\"]
-	;
+lexical Str = [\"] (![\"] | ([\\][\"]))* [\"];

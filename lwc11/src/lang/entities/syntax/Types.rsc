@@ -1,6 +1,6 @@
 module lang::entities::syntax::Types
 
-import lang::entities::syntax::Ident;
+extend lang::entities::syntax::Ident;
 
 syntax Type 
 	= @category="Type" primitive: PrimitiveType
@@ -13,7 +13,7 @@ syntax PrimitiveType
 	| boolean: "boolean"
 	| currency: "currency";
 
-syntax Reserved
+keyword Reserved
 	= "string"
 	| "date"
 	| "integer"

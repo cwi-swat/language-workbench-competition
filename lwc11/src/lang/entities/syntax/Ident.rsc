@@ -1,9 +1,8 @@
 module lang::entities::syntax::Ident
 
-syntax Ident 
-	= lex @category="Identifier" id: [a-zA-Z][a-zA-Z0-9]* - Reserved # [A-Za-z0-9] ;
+lexical Ident 
+	= @category="Identifier" id: ([a-zA-Z][a-zA-Z0-9]* !>> [A-Za-z0-9]) \ Reserved  ;
 	
-syntax Name
+lexical Name
 	= name: Ident id;
 	
-syntax Reserved = ;
