@@ -1,0 +1,9 @@
+BIER = true
+
+condition KATER: true
+
+state AAP:
+	if BIER: goto NOOT
+
+state NOOT:
+	if KATER: goto AAP

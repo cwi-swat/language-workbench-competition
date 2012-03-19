@@ -1,0 +1,78 @@
+START_TEMP = 50
+BURNER_RAMPUP = 10
+RADIATOR_MARGIN = 4
+WATER_MARGIN = 4
+
+# 
+# Controls in diagram
+# Temperatuur sensor
+#
+
+DESIRED_RADIATOR_TEMP = 20
+DESIRED_WATER_TEMP = 60
+
+# Burner
+#  - bool: ignite
+#  - int: gas_level
+#
+# Thermostat
+#  - int: temperature
+#
+# Boiler
+#  - int: temperature
+#
+# (Vacuum|Regular) Pump
+#  - bool: run
+#
+
+condition roomTempLow: TM6 < DESIRED_RADIATOR_TEMP - RADIATOR_MARGIN
+condition roomTempOk: TM6 >= DESIRED_RADIATOR_TEMP
+condition boilerTempLow: B1.watertemp < DESIRED_WATER_TEMP - WATER_MARGIN
+condition boilerTempOk: B200.watertemp >= DESIRED_WATER_TEMP
+condition heatNeeded: roomTempLow or boilerTempLow
+
+state OFF:
+	V1.position = :c
+	if heatNeeded: goto IGNITE
+
+state IGNITE:
+	V1.position = :c
+	C1.ignite = true
+	C1.burnertemp = START_TEMP
+	P1.enabled = false
+	goto RAMPUP
+	
+state RAMPUP:
+	if not C1.ignite: goto IGNITE
+	if C1.burnertemp < C1.requestedtemp: C1.burnertemp = C1.burnertemp + BURNER_RAMPUP
+	if C1.burnertemp >= C1.requestedtemp: goto DISPATCH
+	
+state DISPATCH:
+	V1.position = :c
+	if roomTempLow and boilerTempLow: goto BOTH
+	if boilerTempLow: goto BOILER
+	if roomTempLow: goto RADIATOR	
+	goto RUNNING
+
+state RADIATOR:
+	if roomTempLow and boilerTempLow: goto BOTH
+	if boilerTempLow and roomTempOk: goto BOILER
+	if not heatNeeded: goto RUNNING
+	V1.position = :a, :c
+	
+state BOILER:
+	if roomTempLow and boilerTempLow: goto BOTH
+	if roomTempLow and boilerTempOk: goto RADIATOR
+	if not heatNeeded: goto RUNNING
+	V1.position = :a, :b
+		
+state BOTH:
+	if roomTempLow and boilerTempOk: goto RADIATOR
+	if boilerTempLow and roomTempOk: goto BOILER
+	if not heatNeeded: goto RUNNING
+	V1.position = :c, :b, :a
+		
+state RUNNING:
+	V1.position = :c
+	C1.burnertemp = START_TEMP
+	if heatNeeded: goto RAMPUP

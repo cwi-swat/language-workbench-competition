@@ -1,0 +1,103 @@
+#Aliasses
+WaterPipe is Pipe
+	- diameter: 22 [mm];
+
+GasPipe is Pipe
+	- diameter: 15 [mm];
+
+TempMeter is Temperature Sensor
+	- range: 0 [celsius], 100 [celsius];
+
+FlowMeter is Flow Sensor
+	- range: 0 [m3/minute], 1 [m3/minute];
+
+SpeedMeter is Speed Sensor
+	- range: 0 [rpm], 500 [rpm];
+
+#Rooms
+Room LivingRoom
+	- volume: 80 [m3];
+
+#Elements
+Boiler B1
+	- capacity: 50 [liter];
+	
+Controlled ThreeWay Valve V1;
+
+Radiator R1
+	- power: 600 [watt]
+	- heatcapacity: 2400 [watt]
+	- room: LivingRoom;
+
+Pump P1
+	- capacity: 50 [liter/hour];
+
+Joint J1
+	- connections: fromboiler, fromradiator, tocentralheating;
+
+CentralHeatingUnit C1;
+
+#Elements to outside
+
+##Gas
+Gas Source GasIn
+	- flowrate: 10 [m3/hour];
+
+Controlled Valve V2;
+
+GasPipe G1 connects GasIn with V2.:a
+	- length: 2.5 [m];
+
+GasPipe G2 connects V2.:b with C1.gasin
+	- length: 0.5 [m];
+
+##Water
+Liquid Source ColdWaterIn
+	- flowrate: 10 [m3/hour];
+
+Liquid Exhaust HotWaterOut;
+
+WaterPipe W1 connects ColdWaterIn with B1.coldwaterin
+	- length: 2 [m];
+	
+WaterPipe W2 connects HotWaterOut with B1.hotwaterout
+	- length: 2 [m];
+
+#Waterpipes
+WaterPipe W3 connects C1.hotwaterout with P1.in
+	- length: 1 [m];
+WaterPipe W4 connects P1.out with V1.:a
+	- length: 1.5 [m];
+WaterPipe W5 connects V1.:b with B1.centralheatingin
+	- length: 0.8 [m];
+WaterPipe W6 connects B1.centralheatingout with J1.fromboiler
+	- length: 1.2 [m];
+WaterPipe W7 connects V1.:c with R1.in
+	- length: 3 [m];
+WaterPipe W8 connects R1.out with J1.fromradiator
+	- length: 4 [m];
+WaterPipe W9 connects J1.tocentralheating with C1.coldwaterin
+	- length: 0.5 [m];
+
+#Sensors
+TempMeter TM6
+	- on: LivingRoom.temperature; 
+
+TempMeter TM5
+	- on: C1.burnertemp;
+
+TempMeter TM2
+	- on: B1;
+	
+FlowMeter FM1
+	- on: W2.flow;
+
+FlowMeter SM3 
+	- on: P1;
+
+#Constraints
+constraint cs1:
+	W3.pressure < 2.0 [bar];
+	
+constraint cs2:
+	(G1.flow > 0 [m3/hour] and G1.flow < 0.1 [m3/hour]) or G1.flow == 0;
